@@ -16,7 +16,7 @@
                         <div class="card-body">
                            
                                 <h3>
-                                    <a href="#" style="color:#000000;"><i class="far fa-plus-square"></i>&nbsp;&nbsp;Plantel</a>
+                                    <a href="#" style="color:#037DB4;"><i class="far fa-plus-square"></i>&nbsp;&nbsp;Plantel</a>
                                 </h3>
                          
                             <table id="personalInfo" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
