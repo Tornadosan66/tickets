@@ -35,8 +35,8 @@
                                         <input id="email" type="text" placeholder="email" class="form-control" name="email" value="{{$usuarios->email}}"  autofocus maxlength="50">
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="nombre">Nombres</label>
-                                        <input id="nombre" type="text" placeholder="nombre" class="form-control" name="nombre" value="{{$usuarios->name}}" maxlength="35" autofocus>
+                                        <label for="name">Nombres</label>
+                                        <input id="name" type="text" placeholder="name" class="form-control" name="name" value="{{$usuarios->name}}" maxlength="35" autofocus>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="password">Contraseña</label>
@@ -61,6 +61,17 @@
                                                     <option selected value="{{$plantel->id}}">{{$plantel->nombre_plantel}}</option>
                                                 @endif
                                                 <option value="{{$plantel->id}}">{{$plantel->nombre_plantel}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="area">Area</label>
+                                        <select  id="area" name="area" class="form-control selectpicker "data-live-search="true">
+                                            @foreach($areas as $area)
+                                                @if($usuarios->area_id == $area->id)
+                                                    <option selected value="{{$area->id}}">{{$area->nombre_area}}</option>
+                                                @endif
+                                                <option value="{{$area->id}}">{{$area->nombre_area}}</option>
                                             @endforeach
                                         </select>
                                     </div>

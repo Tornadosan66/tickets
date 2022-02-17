@@ -20,6 +20,7 @@ class CreateAreasTable extends Migration
             $table->integer('id_supervisor_area');
             $table->text('descripcion')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

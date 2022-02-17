@@ -25,6 +25,7 @@ return new class extends Migration
             $table->unsignedBigInteger('plantel_id')->nullable();
             $table->unsignedBigInteger('area_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

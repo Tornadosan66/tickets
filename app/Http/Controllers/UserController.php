@@ -65,7 +65,7 @@ class UserController extends Controller
 
         $user->save();
 
-        $user->roles()->sync($request->roles);
+        $user->roles()->sync($request->rol);
 
         return redirect()->route('usuarios.index')->with('info','Se creo correctamente');
     }
@@ -88,7 +88,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   $usuarios = User::findorfail($id);
+    {  
+        $usuarios = User::findorfail($id);
         $roles = Role::all();
         $planteles = Planteles::all();
         $areas = Area::all();
@@ -106,7 +107,22 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+            $user = User::findorfail($id);
+            $user->name =  $request->name;
+            $user->email =  $request->email;
+            $user->plantel_id =  $request->plantel;
+            $user->area_id =  $request->area;
+            if($request->password)
+            {
+                $user->password = bcrypt($request->password);
+            }   
+
+            $user->save();
+
+            $user->roles()->sync($request->rol);
+
+            
+            return redirect()->route('usuarios.index')->with('info','Se Actualizo correctamente');
     }
 
     /**
@@ -117,6 +133,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findorfail($id)->delete();
+        return redirect()->route('usuarios.index')->with('info','Se Elimino correctamente');
     }
 }

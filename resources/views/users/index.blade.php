@@ -57,9 +57,10 @@
                                        
                                             <td>
                                                 <form method="POST" id="formEliminar" action="" aria-label="{{ __('Usuario') }}" enctype="multipart/form-data">
+                                                    @method('delete')
                                                     @csrf
-                                                    @method('DELETE')
-                                                    <button type="button" id="borrar" value="#" name="borrar" class="btn btn-danger"
+                                                    
+                                                    <button type="button" id="borrar" value="{{route('usuarios.destroy',$usuario->id)}}" name="borrar" class="btn btn-danger"
                                                             onclick="  var r = confirm('Estas seguro que deseas Eliminarlo?');
                             if (r == true) {
 
