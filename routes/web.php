@@ -25,6 +25,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::group(['middleware' => ['auth']], function () {
 Route::resources([
     'planteles' => 'App\Http\Controllers\PlantelesController',
+    'usuarios' => 'App\Http\Controllers\UserController',
 
 ]);
 

@@ -9,9 +9,13 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+use App\Models\Area;
+use App\Models\Planteles;
 
 class User extends Authenticatable
 {
+        use HasRoles;
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
@@ -58,4 +62,12 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+    public function plantel(){
+        return $this->belongsTo(Planteles::class);
+    }
+    public function area(){
+        return $this->belongsTo(Area::class);
+    }
 }
