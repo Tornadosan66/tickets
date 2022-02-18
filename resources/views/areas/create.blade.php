@@ -25,13 +25,13 @@
                                     <div class="col-md-12">
                                         <br>
                                         <center>
-                                            <h4>Datos generales</h4>
+                                            <h4>Datos del area</h4>
                                         </center>
                                     </div>
                                     
                                     <div class="col-md-4">
                                         <label for="name">Nombre de area</label>
-                                        <input id="name" type="text" placeholder="name" class="form-control" name="name" value="{{old('name')}}" maxlength="35" required autofocus>
+                                        <input id="name" type="text" placeholder="Nombre del area" class="form-control" name="name" value="{{old('name')}}" maxlength="35" required autofocus>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="plantel">planteles</label>
@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="desc">Descripción</label>
-                                        <textarea id="desc" name="desc" rows="3" cols="100"></textarea>
+                                        <textarea id="desc" name="desc" placeholder="Descripción del area" rows="3" cols="100"></textarea>
                                     </div>
 
                                 </div>

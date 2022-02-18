@@ -13,7 +13,7 @@
                     <div class="card" style="box-shadow: 0 5px 5px 0 rgba(0,0,0,0.5);">
                         <div class="card-header">
                             <center>
-                                <h3>Editar plantel</h3>
+                                <h3>Editar area</h3>
                             </center>
                         </div>
                         <form method="POST" action="{{ route('areas.update',$areas->id) }}" aria-label="{{ __('areas') }}" enctype="multipart/form-data">
@@ -26,19 +26,19 @@
                                     <div class="col-md-12">
                                         <br>
                                         <center>
-                                            <h4>Datos generales</h4>
+                                            <h4>Datos del area</h4>
                                         </center>
                                     </div>
                                     
                                     <div class="col-md-4">
                                         <label for="name">Nombre de area</label>
-                                        <input id="name" type="text" placeholder="name" class="form-control" name="name" value="{{$areas->nombre_area}}" maxlength="35" required autofocus>
+                                        <input id="name" type="text" placeholder="Nombre del area" class="form-control" name="name" value="{{$areas->nombre_area}}" maxlength="35" required autofocus>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="plantel">planteles</label>
                                         <select  id="plantel" name="plantel" class="form-control selectpicker "data-live-search="true">
                                             @foreach($planteles as $plantel)
-
+                                                
                                                 <option value="{{$plantel->id}}">{{$plantel->nombre_plantel}}</option>
 
                                             @endforeach
@@ -48,14 +48,15 @@
                                         <label for="supervisor">Supervisor</label>
                                         <select  id="supervisor" name="supervisor" class="form-control selectpicker "data-live-search="true">
                                             @foreach($usuarios as $usuario)
-                                            
-                                                <option value="{{$usuario->id}}">{{$usuario->name}}</option>
+
+                                                    <option value="{{$usuario->id}}">{{$usuario->name}}</option>
+
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="desc">Descripción</label>
-                                        <textarea id="desc" name="desc" rows="3" cols="100"></textarea>
+                                        <textarea id="desc" name="desc" rows="3" cols="100" placeholder="Si no se desea cambiar dejar vacio"></textarea>
                                     </div>
 
                                 </div>

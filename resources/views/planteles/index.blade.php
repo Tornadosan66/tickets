@@ -20,20 +20,21 @@
                             <h2> GESTION Planteles</h2>
                         </div>
                         <div class="card-body">
-                           
+                           @can('planteles.create')
                                 <h3>
                                     <a href="{{route('planteles.create')}}" style="color:#037DB4;"><i class="far fa-plus-square"></i>&nbsp;&nbsp;Plantel</a>
                                 </h3>
-                         
+                         @endcan
                             <table id="personalInfo" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
                                 <thead>
                                 <tr>
                                     <th>plantel</th>
-                                   
+                                   @can('planteles.edit')
                                         <th>Editar</th>
-                                  
+                                        @endcan
+                                  @can('planteles.destroy')
                                         <th>Eliminar</th>
-                                   
+                                   @endcan
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -42,7 +43,7 @@
 
                                         <td>{{$plantel->nombre_plantel}}</td>
 
-                                        
+                                        @can('planteles.edit')
                                             <td>
                                                 <a href="{{route('planteles.edit',$plantel->id)}}">
                                                     <button class="btn btn-primary">
@@ -50,8 +51,8 @@
                                                     </button>
                                                 </a>
                                             </td>
-                                       
-                                       
+                                       @endcan
+                                       @can('planteles.destroy')
                                             <td>
                                                 <form method="POST" id="formEliminar" action="" aria-label="{{ __('Noticia') }}" enctype="multipart/form-data">
                                                     @csrf
@@ -69,6 +70,7 @@
                                                     </button>
                                                 </form>
                                             </td>
+                                            @endcan
                                         
                                     </tr>
                                 

@@ -9,45 +9,40 @@
 
                 <!--aqui empieza el desmais -->
                 @if (session('info'))
-    <div class="alert alert-success">
-        <strong>{{session('info')}}</strong>
-    </div>
-    
-@endif
+                    <div class="alert alert-success">
+                        <strong>{{session('info')}}</strong>
+                    </div>
+                @endif
                 <div class="col-md-12 text-center">
                     <div class="card" style="box-shadow: 0 5px 5px 0 rgba(0,0,0,0.5);">
                         <div class="card-header">
                             <h2> GESTION areas</h2>
                         </div>
                         <div class="card-body">
-                           
+                           @can('areas.create')
                                 <h3>
                                     <a href="{{route('areas.create')}}" style="color:#037DB4;"><i class="far fa-plus-square"></i>&nbsp;&nbsp;Areas</a>
                                 </h3>
-                         
+                         @endcan
                             <table id="personalInfo" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
                                 <thead>
                                 <tr>
                                     <th>Areas</th>
-
                                     <th>plantel</th>
-
-                                    
-                                   
-                                        <th>Editar</th>
-                                  
-                                        <th>Eliminar</th>
-                                   
+                                    @can('areas.edit')
+                                    <th>Editar</th>
+                                    @endcan
+                                    @can('areas.destroy')
+                                    <th>Eliminar</th>
+                                    @endcan
                                 </tr>
                                 </thead>
                                 <tbody>
-                               @foreach($areas as $area)
+                                @foreach($areas as $area)
                                     <tr>
-
                                         <td>{{$area->nombre_area}}</td>
                                         <td>{{$area->planteles->nombre_plantel}}</td>
-
-                                        
+                                            @can('areas.edit')
                                             <td>
                                                 <a href="{{route('areas.edit',$area->id)}}">
                                                     <button class="btn btn-primary">
@@ -55,28 +50,25 @@
                                                     </button>
                                                 </a>
                                             </td>
-                                       
-                                       
+                                            @endcan
+                                            @can('areas.destroy')
                                             <td>
                                                 <form method="POST" id="formEliminar" action="" aria-label="{{ __('Noticia') }}" enctype="multipart/form-data">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="button" id="borrar" value="{{route('areas.destroy',$area->id)}}" name="borrar" class="btn btn-danger"
                                                             onclick="  var r = confirm('Estas seguro que deseas Eliminarlo?');
-                            if (r == true) {
-
-                            $('#formEliminar').attr('action',this.value).submit();
-
-                            } else {
-                            return false;
-                            }">
+                                                    if (r == true) {
+                                                        $('#formEliminar').attr('action',this.value).submit();
+                                                    } else {
+                                                        return false;
+                                                    }">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </button>
                                                 </form>
                                             </td>
-                                        
+                                            @endcan
                                     </tr>
-                                
                                     @endforeach
                                 </tbody>
                             </table>
@@ -84,8 +76,6 @@
                     </div>
                 </div>
                 <!--aqui termina -->
-
-
             </div>
         </div>
     </div>

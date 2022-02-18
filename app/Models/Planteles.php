@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Planteles extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+    //use SoftDeletes;
 }

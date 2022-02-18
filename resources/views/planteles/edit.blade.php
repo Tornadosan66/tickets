@@ -26,13 +26,13 @@
                                     <div class="col-md-12">
                                         <br>
                                         <center>
-                                            <h4>Datos generales</h4>
+                                            <h4>Datos del plantel</h4>
                                         </center>
                                     </div>
                                     
                                     <div class="col-md-4">
                                         <label for="name">Nombre de plantel</label>
-                                        <input id="name" type="text" placeholder="name" class="form-control" name="name" value="{{$planteles->nombre_plantel}}" maxlength="35" required autofocus>
+                                        <input id="name" type="text" placeholder="Nombre del plantel" class="form-control" name="name" value="{{$planteles->nombre_plantel}}" maxlength="35" required autofocus>
                                     </div>
                                     
 

@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\DB;
 
 class Areascontroller extends Controller
 {
+       public function __construct()
+    {
+        $this->middleware('can:areas.index')->only('index');
+        $this->middleware('can:areas.edit')->only('edit','update');
+        $this->middleware('can:areas.create')->only('create','store');
+        $this->middleware('can:areas.destroy')->only('destroy');
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +37,7 @@ class Areascontroller extends Controller
      */
     public function create()
     {
-         $usuarios = DB::table('users')->join('model_has_roles','model_id' ,'=', 'users.id')->select('users.id', 'users.name')->whereNull('deleted_at')->where('model_has_roles.role_id', '<', 3)->get();
+        $usuarios = DB::table('users')->join('model_has_roles','model_id' ,'=', 'users.id')->select('users.id', 'users.name')->whereNull('deleted_at')->where('model_has_roles.role_id', '<', 3)->get();
         $planteles = new Planteles();
         $planteles = $planteles->all();
         
@@ -109,6 +117,7 @@ class Areascontroller extends Controller
      */
     public function destroy($id)
     {
-        //
+        $area = Area::findorfail($id)->delete();
+        return redirect()->route('areas.index')->with('info','Se borró el area');
     }
 }

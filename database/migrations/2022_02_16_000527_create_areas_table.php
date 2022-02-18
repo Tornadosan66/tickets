@@ -22,7 +22,7 @@ class CreateAreasTable extends Migration
             $table->foreign('id_plantel')->references('id')->on('planteles')->onDelete('cascade');
             $table->foreign('id_supervisor_area')->references('id')->on('users');
             $table->timestamps();
-            $table->softDeletes();
+            //$table->softDeletes();
         });
     }
 

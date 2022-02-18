@@ -40,6 +40,7 @@
                                         <label for="password">Contraseña</label>
                                         <input id="password" type="text" placeholder="password" class="form-control" name="password" value="{{old('password')}}" maxlength="35" required autofocus>
                                     </div>
+                                    @if(Auth::user()->getRoleNames()[0] == 'Superusuario')
                                     <div class="col-md-4">
                                         <label for="rol">Rol</label>
                                         <select required autofocus id="rol" name="rol" class="form-control selectpicker "data-live-search="true">
@@ -64,7 +65,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-
+                                    @endif
                                 </div>
 
                             </div>

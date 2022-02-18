@@ -17,7 +17,7 @@ class CreatePlantelesTable extends Migration
             $table->id();
             $table->string('nombre_plantel');
             $table->timestamps();
-            $table->softDeletes();
+            //$table->softDeletes();
         });
     }
 

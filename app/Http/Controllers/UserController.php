@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Area;
 use App\Models\Planteles;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
+
 class UserController extends Controller
 {
 
@@ -29,9 +31,27 @@ class UserController extends Controller
      */
     public function index()
     {
-        $usuarios = new User();
-        $usuarios = $usuarios->all();
+        $idUse = Auth::id();
+
+        $use = new User();
+        $use = $use->where('id',$idUse)->first();
+
+
+
+        $roles = $use->getRoleNames(); 
+        
+
+        if($roles[0] == 'Superusuario'){
+            //dd($roles);
+            $usuarios = new User();
+            $usuarios = $usuarios->all();
+        }else if($roles[0] == 'Supervisor'){
+            $usuarios = new User();
+            $usuarios = $usuarios->where('area_id',$use->area_id)->get();
+        }
+        
         return view('users.index',compact('usuarios'));
+        
     }
 
     /**
@@ -56,16 +76,34 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User();
-        $user->name =  $request->name;
-        $user->email =  $request->email;
-        $user->plantel_id =  $request->plantel;
-        $user->area_id =  $request->area;
-        $user->password = bcrypt($request->password);
+        $idUse = Auth::id();
+        $use = new User();
+        $use = $use->where('id',$idUse)->first();
+        $roles = $use->getRoleNames();
+        if($roles[0] == 'Superusuario'){
+            $user = new User();
+            $user->name =  $request->name;
+            $user->email =  $request->email;
+            $user->plantel_id =  $request->plantel;
+            $user->area_id =  $request->area;
+            $user->password = bcrypt($request->password);
 
-        $user->save();
+            $user->save();
+            $user->roles()->sync($request->rol);
+        }else if($roles[0] == 'Supervisor'){
+            $user = new User();
+            $user->name =  $request->name;
+            $user->email =  $request->email;
+            $user->plantel_id = $use->plantel_id;
+            $user->area_id = $use->area_id;
+            $user->password = bcrypt($request->password);
 
-        $user->roles()->sync($request->rol);
+            $user->save();
+            $user->roles()->sync(3);
+        }
+
+
+        
 
         return redirect()->route('usuarios.index')->with('info','Se creo correctamente');
     }

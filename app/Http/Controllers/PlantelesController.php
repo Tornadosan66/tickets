@@ -8,6 +8,14 @@ use App\Models\Planteles;
 
 class PlantelesController extends Controller
 {
+       public function __construct()
+    {
+        $this->middleware('can:planteles.index')->only('index');
+        $this->middleware('can:planteles.edit')->only('edit','update');
+        $this->middleware('can:planteles.create')->only('create','store');
+        $this->middleware('can:planteles.destroy')->only('destroy');
+
+    }
     /**
      * Display a listing of the resource.
      *
