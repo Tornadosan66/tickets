@@ -19,4 +19,9 @@ class Area extends Model
      public function supervisor(){
         return $this->belongsTo(Users::class,'id_supervisor_area');
     }
+
+
+
+
+    //Test de conflictos
 }
