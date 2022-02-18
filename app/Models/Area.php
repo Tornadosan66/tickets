@@ -10,7 +10,7 @@ use App\Models\Users;
 class Area extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+    use SoftDeletexxxs;
 
 
     public function planteles(){
