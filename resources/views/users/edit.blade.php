@@ -46,9 +46,11 @@
                                         <label for="rol">Rol</label>
                                         <select  id="rol" name="rol" class="form-control selectpicker "data-live-search="true">
                                             @foreach($roles as $rol)
-                                                <option value="{{$rol->id}}">{{$rol->name}}</option>
+                                                
                                                 @if($usuarios->getRoleNames()[0] == $rol->name)
-                                                    <option selected="" value="{{$rol->id}}">{{$rol->name}}</option>
+                                                <option selected="" value="{{$rol->id}}">{{$rol->name}}</option>
+                                                @else
+                                                <option value="{{$rol->id}}">{{$rol->name}}</option>
                                                 @endif
                                             @endforeach
                                         </select>
@@ -59,8 +61,10 @@
                                             @foreach($planteles as $plantel)
                                                 @if($usuarios->plantel_id == $plantel->id)
                                                     <option selected value="{{$plantel->id}}">{{$plantel->nombre_plantel}}</option>
+                                                 @else
+                                                    <option value="{{$plantel->id}}">{{$plantel->nombre_plantel}}</option>
                                                 @endif
-                                                <option value="{{$plantel->id}}">{{$plantel->nombre_plantel}}</option>
+                                                
                                             @endforeach
                                         </select>
                                     </div>
@@ -70,8 +74,10 @@
                                             @foreach($areas as $area)
                                                 @if($usuarios->area_id == $area->id)
                                                     <option selected value="{{$area->id}}">{{$area->nombre_area}}</option>
+                                                @else    
+                                                    <option value="{{$area->id}}">{{$area->nombre_area}}</option>
                                                 @endif
-                                                <option value="{{$area->id}}">{{$area->nombre_area}}</option>
+                                                
                                             @endforeach
                                         </select>
                                     </div>
