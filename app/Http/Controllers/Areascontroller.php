@@ -29,7 +29,7 @@ class Areascontroller extends Controller
      */
     public function create()
     {
-         $usuarios = DB::table('users')->join('model_has_roles','model_id' ,'=', 'users.id')->select('users.id', 'users.name')->where('model_has_roles.role_id', '<', 3)->get();
+         $usuarios = DB::table('users')->join('model_has_roles','model_id' ,'=', 'users.id')->select('users.id', 'users.name')->whereNull('deleted_at')->where('model_has_roles.role_id', '<', 3)->get();
         $planteles = new Planteles();
         $planteles = $planteles->all();
         
@@ -74,7 +74,7 @@ class Areascontroller extends Controller
      */
     public function edit($id)
     {
-        $usuarios = DB::table('users')->join('model_has_roles','model_id' ,'=', 'users.id')->select('users.id', 'users.name')->where('model_has_roles.role_id', '<', 3)->get();
+        $usuarios = DB::table('users')->join('model_has_roles','model_id' ,'=', 'users.id')->select('users.id', 'users.name')->whereNull('deleted_at')->where('model_has_roles.role_id', '<', 3)->get();
         $planteles = new Planteles();
         $planteles = $planteles->all();
         $areas = Area::findorfail($id);

@@ -17,6 +17,14 @@ class UserSeeder extends Seeder
     public function run()
     {
 
+        User::create([
+        'name' => 'nacho',
+        'email' => 'nacho@test.com',
+        'password' => bcrypt('12345678'),
+        'area_id' => 1,
+        'plantel_id' => 1
+
+        ])->assignRole('Superusuario');
 
         Planteles::create([
 
@@ -29,14 +37,7 @@ class UserSeeder extends Seeder
             'id_supervisor_area' => 1
         ]);
 
-        User::create([
-        'name' => 'nacho',
-        'email' => 'nacho@test.com',
-        'password' => bcrypt('12345678'),
-        'area_id' => 1,
-        'plantel_id' => 1
-
-        ])->assignRole('Superusuario');
+        
   
     }
 }
