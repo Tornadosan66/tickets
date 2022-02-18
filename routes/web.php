@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth']], function () {
 Route::resources([
     'planteles' => 'App\Http\Controllers\PlantelesController',
     'usuarios' => 'App\Http\Controllers\UserController',
+    'areas' => 'App\Http\Controllers\AreasController',
 
 ]);
 

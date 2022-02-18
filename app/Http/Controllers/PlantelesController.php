@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Planteles;
+
 
 class PlantelesController extends Controller
 {
@@ -13,7 +15,9 @@ class PlantelesController extends Controller
      */
     public function index()
     {
-        return view('planteles.index');
+        $planteles = new Planteles();
+        $planteles = $planteles->all();
+        return view('planteles.index',compact('planteles'));
     }
 
     /**
@@ -23,7 +27,7 @@ class PlantelesController extends Controller
      */
     public function create()
     {
-        //
+        return view('planteles.create');
     }
 
     /**
@@ -34,7 +38,12 @@ class PlantelesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $plantel = new Planteles();
+        $plantel->nombre_plantel =  $request->name;
+
+        $plantel->save();
+
+        return redirect()->route('planteles.index')->with('info','Se creo correctamente');
     }
 
     /**
@@ -56,7 +65,8 @@ class PlantelesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $planteles = Planteles::findorfail($id);
+        return view('planteles.edit',compact('planteles'));
     }
 
     /**
@@ -68,7 +78,12 @@ class PlantelesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $planteles = Planteles::findorfail($id);
+        $planteles->nombre_plantel =  $request->name;
+
+        $planteles->save();
+
+        return redirect()->route('planteles.index')->with('info','Se modofico el nombre');
     }
 
     /**
@@ -79,6 +94,7 @@ class PlantelesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $planteles = Planteles::findorfail($id)->delete();
+        return redirect()->route('planteles.index')->with('info','Se elimino');
     }
 }

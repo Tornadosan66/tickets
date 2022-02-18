@@ -17,18 +17,22 @@
                 <div class="col-md-12 text-center">
                     <div class="card" style="box-shadow: 0 5px 5px 0 rgba(0,0,0,0.5);">
                         <div class="card-header">
-                            <h2> GESTION Planteles</h2>
+                            <h2> GESTION areas</h2>
                         </div>
                         <div class="card-body">
                            
                                 <h3>
-                                    <a href="{{route('planteles.create')}}" style="color:#037DB4;"><i class="far fa-plus-square"></i>&nbsp;&nbsp;Plantel</a>
+                                    <a href="{{route('areas.create')}}" style="color:#037DB4;"><i class="far fa-plus-square"></i>&nbsp;&nbsp;Areas</a>
                                 </h3>
                          
                             <table id="personalInfo" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
                                 <thead>
                                 <tr>
+                                    <th>Areas</th>
+
                                     <th>plantel</th>
+
+                                    
                                    
                                         <th>Editar</th>
                                   
@@ -37,14 +41,15 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                               @foreach($planteles as $plantel)
+                               @foreach($areas as $area)
                                     <tr>
 
-                                        <td>{{$plantel->nombre_plantel}}</td>
+                                        <td>{{$area->nombre_area}}</td>
+                                        <td>{{$area->planteles->nombre_plantel}}</td>
 
                                         
                                             <td>
-                                                <a href="{{route('planteles.edit',$plantel->id)}}">
+                                                <a href="{{route('areas.edit',$area->id)}}">
                                                     <button class="btn btn-primary">
                                                         <i class="fas fa-edit"></i>
                                                     </button>
@@ -56,7 +61,7 @@
                                                 <form method="POST" id="formEliminar" action="" aria-label="{{ __('Noticia') }}" enctype="multipart/form-data">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="button" id="borrar" value="{{route('planteles.destroy',$plantel->id)}}" name="borrar" class="btn btn-danger"
+                                                    <button type="button" id="borrar" value="{{route('areas.destroy',$area->id)}}" name="borrar" class="btn btn-danger"
                                                             onclick="  var r = confirm('Estas seguro que deseas Eliminarlo?');
                             if (r == true) {
 

@@ -13,15 +13,16 @@
                     <div class="card" style="box-shadow: 0 5px 5px 0 rgba(0,0,0,0.5);">
                         <div class="card-header">
                             <center>
-                                <h3>Crear plantel</h3>
+                                <h3>Editar plantel</h3>
                             </center>
                         </div>
-                        <form method="POST" action="{{ route('planteles.store') }}" aria-label="{{ __('planteles') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('planteles.update',$planteles->id) }}" aria-label="{{ __('planteles') }}" enctype="multipart/form-data">
 
 
                             <div class="card-body">
                                 <div class="row">
                                     @csrf
+                                    @method('PUT')
                                     <div class="col-md-12">
                                         <br>
                                         <center>
@@ -31,7 +32,7 @@
                                     
                                     <div class="col-md-4">
                                         <label for="name">Nombre de plantel</label>
-                                        <input id="name" type="text" placeholder="name" class="form-control" name="name" value="{{old('name')}}" maxlength="35" required autofocus>
+                                        <input id="name" type="text" placeholder="name" class="form-control" name="name" value="{{$planteles->nombre_plantel}}" maxlength="35" required autofocus>
                                     </div>
                                     
 
