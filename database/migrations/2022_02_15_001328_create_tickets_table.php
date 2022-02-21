@@ -19,8 +19,9 @@ class CreateTicketsTable extends Migration
             $table->unsignedBigInteger('area_id');
             $table->unsignedBigInteger('respondable_id');
             $table->date('fecha_envio');
-            $table->integer('status')->default(1);
+            $table->integer('status_id')->default(1);
             $table->time('tiempo_realizar');
+            $table->date('fecha_completada');
             $table->integer('prioridad');
             $table->timestamps();
             $table->softDeletes();
