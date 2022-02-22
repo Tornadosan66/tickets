@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('dashboard');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', 'App\Http\Controllers\DashBoardController@Panel')->name('dashboard');
@@ -27,6 +27,8 @@ Route::resources([
     'areas' => 'App\Http\Controllers\AreasController',
     'ticket' => 'App\Http\Controllers\DashBoardController',
 ]);
+
+Route::get('/consulta/areas/{area}','App\Http\Controllers\DashBoardController@consulta_areas')->name('consulta.areas');
 
 
 });

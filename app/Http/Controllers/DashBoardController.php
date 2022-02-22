@@ -54,7 +54,7 @@ class DashBoardController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -89,5 +89,12 @@ class DashBoardController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+        public function consulta_areas($area)
+    {
+        $area = Area::where("id_plantel",$area)->get();
+        
+        return response()->json($area->toArray());
     }
 }

@@ -26,8 +26,8 @@
                                     </div>
                                     
                                     <div class="col-md-3">
-                                        <label for="area">Plantel</label>
-                                        <input id="area" type="text" placeholder="Si esto se ve, todavia no hay plantel" class="form-control" name="name" value="{{Auth::user()->plantel->nombre_plantel}}" maxlength="35" required autofocus disabled>
+                                        <label for="plantel">Plantel</label>
+                                        <input id="plantel" type="text" placeholder="Si esto se ve, todavia no hay plantel" class="form-control" name="plantel" value="{{Auth::user()->plantel->nombre_plantel}}" maxlength="35" required autofocus >
                                     </div>
                                     <div class="col-md-3">
                                         <label for="area">Area</label>
@@ -93,7 +93,7 @@
 
                 <!-- (Optional) Latest compiled and minified JavaScript translation files -->
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
-                <script defer src="{{asset('public/js/cliente/cliente.js')}}"></script>
+                <script defer src="{{asset('js/tickets/tickets.js')}}"></script>
 
                 <!--aqui termina -->
 
