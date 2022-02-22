@@ -69,7 +69,14 @@
                     </div>
                 </div>
 
-
+                <div>
+                    <br><br>
+                    <a href="{{route('ticket.create')}}">
+                        <button class="btn btn-primary">
+                            <i>Generar ticket</i>
+                        </button>
+                    </a>
+                </div>
 
             </div>
         </div>

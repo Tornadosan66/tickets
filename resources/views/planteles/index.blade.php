@@ -59,13 +59,11 @@
                                                     @method('DELETE')
                                                     <button type="button" id="borrar" value="{{route('planteles.destroy',$plantel->id)}}" name="borrar" class="btn btn-danger"
                                                             onclick="  var r = confirm('Estas seguro que deseas Eliminarlo?');
-                            if (r == true) {
-
-                            $('#formEliminar').attr('action',this.value).submit();
-
-                            } else {
-                            return false;
-                            }">
+                                                        if (r == true) {
+                                                            $('#formEliminar').attr('action',this.value).submit();
+                                                        } else {
+                                                            return false;
+                                                        }">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </button>
                                                 </form>

@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Area;
+use App\Models\Planteles;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
 
 class DashBoardController extends Controller
 {
@@ -13,9 +18,12 @@ class DashBoardController extends Controller
      */
     public function index()
     {
+        //return view('dashboard');
+    }
+    public function Panel()
+    {
         return view('dashboard');
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -23,7 +31,7 @@ class DashBoardController extends Controller
      */
     public function create()
     {
-        //
+        return view('Dash.Formulario');
     }
 
     /**
@@ -34,7 +42,8 @@ class DashBoardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $idUse = Auth::id();
+        $use = new User();
     }
 
     /**

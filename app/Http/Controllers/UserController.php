@@ -39,7 +39,8 @@ class UserController extends Controller
 
 
         $roles = $use->getRoleNames(); 
-        
+        //$nombres = $use->gethostname();
+        //dd($nombres);
 
         if($roles[0] == 'Superusuario'){
             //dd($roles);
