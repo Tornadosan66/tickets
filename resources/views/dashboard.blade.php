@@ -8,6 +8,11 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                @if (session('info'))
+                    <div class="alert alert-success">
+                        <strong>{{session('info')}}</strong>
+                    </div>
+                @endif
                <!--Tarjetas -->
     <div class="bg-gray-100 flex items-center justify-center bg-gray-100">
         <div class="max-w-7xl w-full mx-auto py-6 sm:px-6 lg:px-8">
@@ -25,7 +30,7 @@
                             </div>
                             <div class="flex flex-col justify-center">
                                
-                                    <div class="text-lg">10</div>
+                                    <div class="text-lg">{{$completados->count()}}</div>
                                
                                 <div class="text-sm text-gray-400">Completadas</div>
                             </div>
@@ -41,7 +46,7 @@
                             </div>
                             <div class="flex flex-col justify-center">
                                
-                                    <div class="text-lg">10</div>
+                                    <div class="text-lg">{{$pendientes->count()}}</div>
                          
                                 <div class="text-sm text-gray-400">Pendientes</div>
                             </div>
@@ -61,7 +66,7 @@
                             </div>
                             <div class="flex flex-col justify-center">
                                
-                                    <div class="text-lg">10</div>
+                                    <div class="text-lg">{{$cancelado->count()}}</div>
                             
                                 <div class="text-sm text-gray-400">Canceladas</div>
                             </div>
@@ -98,8 +103,8 @@
 </ul>
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">@include('partials.completadas')</div>
-  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
-  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
+  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">@include('partials.pendientes')</div>
+  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">@include('partials.canceladas')</div>
 </div>
 
     <!-- fin Nav -->

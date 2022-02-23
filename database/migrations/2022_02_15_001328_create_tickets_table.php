@@ -17,12 +17,12 @@ class CreateTicketsTable extends Migration
             $table->id();
             $table->string('descripcion');
             $table->unsignedBigInteger('area_id');
-            $table->unsignedBigInteger('respondable_id');
+            $table->unsignedBigInteger('responsable_id');
             $table->date('fecha_envio');
             $table->integer('status_id')->default(1);
-            $table->time('tiempo_realizar');
-            $table->date('fecha_completada');
-            $table->integer('prioridad');
+            $table->string('tiempo_realizar');
+            $table->date('fecha_completada')->nullable();
+            $table->integer('prioridad')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

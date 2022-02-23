@@ -7,7 +7,7 @@
     </tr>
   </thead>
     <tbody>
-      @foreach($completados as $ticket)                 
+      @foreach($cancelado as $ticket)    
       <tr>
         <td>{{$ticket->descripcion}}</td> <!--Descripcion-->
         <td>{{$ticket->fecha_envio}}</td> <!--Fecha que se asingno-->

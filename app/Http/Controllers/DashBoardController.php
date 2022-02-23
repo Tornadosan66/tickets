@@ -8,6 +8,7 @@ use App\Models\Area;
 use App\Models\Planteles;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Ticket;
 
 class DashBoardController extends Controller
 {
@@ -22,7 +23,43 @@ class DashBoardController extends Controller
     }
     public function Panel()
     {
-        return view('dashboard');
+        $idUse = Auth::id();
+        $use = new User();
+        $use = $use->where('id',$idUse)->first();
+
+        $roles = $use->getRoleNames();
+
+        if($roles[0] == 'Usuario'){
+            $pendientes = Ticket::where('status_id', 1)
+            ->where('responsable_id', $use->id)->get();
+        }else if($roles[0] == 'Supervisor'){
+            $pendientes = Ticket::where('status_id', 1)
+            ->where('area_id', $use->area_id)->get();
+        }else if($roles[0] == 'Superusuario'){
+            $pendientes = Ticket::where('status_id', 1)->get();
+        }
+        
+        if($roles[0] == 'Usuario'){
+            $completados = Ticket::where('status_id', 2)
+            ->where('responsable_id', $use->id)->get();
+        }else if($roles[0] == 'Supervisor'){
+            $completados = Ticket::where('status_id', 2)
+            ->where('area_id', $use->area_id)->get();
+        }else if($roles[0] == 'Superusuario'){
+            $completados = Ticket::where('status_id', 2)->get();
+        }
+
+        if($roles[0] == 'Usuario'){
+            $cancelado = Ticket::where('status_id', 3)
+            ->where('responsable_id', $use->id)->get();
+        }else if($roles[0] == 'Supervisor'){
+            $cancelado = Ticket::where('status_id', 3)
+            ->where('area_id', $use->area_id)->get();
+        }else if($roles[0] == 'Superusuario'){
+            $cancelado = Ticket::where('status_id', 3)->get();
+        }
+
+        return view('dashboard',compact("pendientes", "completados", "cancelado"));
     }
     /**
      * Show the form for creating a new resource.
@@ -31,7 +68,10 @@ class DashBoardController extends Controller
      */
     public function create()
     {
-        return view('Dash.Formulario');
+        $planteles = Planteles::all();
+        $areas = Area::all();
+        $usuarios = User::all();
+        return view('Dash.Formulario', compact('planteles'), compact('areas'), compact('usuarios'));
     }
 
     /**
@@ -42,8 +82,17 @@ class DashBoardController extends Controller
      */
     public function store(Request $request)
     {
-        $idUse = Auth::id();
-        $use = new User();
+        $ticket = new Ticket();
+        $ticket->descripcion = $request->desc;
+        $ticket->area_id = $request->area;
+        $ticket->responsable_id = $request->Usuarios;
+        $ticket->fecha_envio = $request->fecha_envio;
+        $ticket->status_id = "1";
+        $ticket->tiempo_realizar = $request->tiempo;
+
+        $ticket->save();
+
+        return redirect()->route('dashboard')->with('info','se hizo el ticket');
     }
 
     /**
@@ -91,10 +140,16 @@ class DashBoardController extends Controller
         //
     }
 
-        public function consulta_areas($area)
+    public function consulta_areas($area)
     {
         $area = Area::where("id_plantel",$area)->get();
         
         return response()->json($area->toArray());
+    }
+    public function usuarios($usuarios)
+    {
+        $user = User::where("area_id",$usuarios)->get();
+        
+        return response()->json($user->toArray());
     }
 }

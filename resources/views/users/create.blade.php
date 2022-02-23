@@ -54,6 +54,7 @@
                                         <select  id="plantel" name="plantel" class="form-control selectpicker "data-live-search="true">
                                             @foreach($planteles as $plantel)
                                                 <option value="{{$plantel->id}}">{{$plantel->nombre_plantel}}</option>
+                                                
                                             @endforeach
                                         </select>
                                     </div>

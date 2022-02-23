@@ -17,7 +17,6 @@
                             <div class="card-body">
                                 <div class="row">
                                     @csrf
-                                    @method('PUT')
                                     <div class="col-md-12">
                                         <br>
                                         <center>
@@ -25,36 +24,47 @@
                                         </center>
                                     </div>
                                     
+                                  
                                     <div class="col-md-3">
                                         <label for="plantel">Plantel</label>
-                                        <input id="plantel" type="text" placeholder="Si esto se ve, todavia no hay plantel" class="form-control" name="plantel" value="{{Auth::user()->plantel->nombre_plantel}}" maxlength="35" required autofocus >
+                                        <select  id="plantel" name="plantel" class="form-control selectpicker "data-live-search="true">
+                                            <option value="0">Seleciona una opcion</option>
+                                            @foreach($planteles as $plantel)
+                                                <option value="{{$plantel->id}}">{{$plantel->nombre_plantel}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="area">Area</label>
-                                        <input id="area" type="text" placeholder="Si esto se ve, todavia no hay area" class="form-control" name="name" value="{{Auth::user()->area->nombre_area}}" maxlength="35" required autofocus disabled>
+                                        <select  id="area" name="area" class="form-control selectpicker "data-live-search="true">
+                                                <option value="0">Seleciona una opcion</option>
+                                        </select>
                                     </div>
-
                                     <div class="col-md-3">
-                                        <label for="responsable">Responsable</label>
-                                        <input id="responsable" type="text" placeholder="Si esto se ve, todavia no hay responsable" class="form-control" name="responsable" value="" maxlength="35" required autofocus disabled>
+                                        <label for="Usuarios">Usuarios</label>
+                                        <select  id="Usuarios" name="Usuarios" class="form-control selectpicker "data-live-search="true">
+                                                <option value="0">Seleciona una opcion</option>
+                                        </select>
                                     </div>
-                                    
                                     <div class="col-md-3">
-                                        <label for="responsable">Usuarios</label>
-                                        <input id="responsable" type="text" placeholder="Si esto se ve, todavia no hay responsable" class="form-control" name="responsable" value="" maxlength="35" required autofocus disabled>
+                                        <label for="tiempo">Tiempo a realizar</label>
+                                        <select  id="tiempo" name="tiempo" class="form-control selectpicker "data-live-search="true">
+                                                <option value="0"></option>
+                                                <option value="1">1 hora</option>
+                                                <option value="3">3 horas</option>
+                                                <option value="5">5 horas</option>
+                                                <option value="10">10 horas</option>
+                                                <option value="15">15 horas</option>
+                                                <option value="20">20 horas</option>
+                                                <option value="24">1 dia</option>
+                                        </select>
                                     </div>
-
                                     <div class="col-md-5">
                                         <label for="fecha_envio">Fecha envio</label>
                                         <br>
-                                        <input type="date" name="fecha_envio" value="<?php echo date("Y-m-d");?>" disabled>
+                                        <input type="date" name="fecha_envio" value="<?php echo date("Y-m-d");?>" readonly>
                                     </div>
-                                    <div class="col-md-5">
-                                        <label for="tiempo_realizar">Tiempo a realizar</label>
-                                        <br>
-                                        <input type="date" name="tiempo_realizar" min="<?php echo date("Y-m-d");?>" max="2022-12-31" value="<?php echo date("Y-m-d");?>">
-                                    </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <label for="desc">Descripción</label>
                                         <textarea id="desc" name="desc" placeholder="Descripción de la tarea" rows="3" cols="100"></textarea>
                                     </div>
