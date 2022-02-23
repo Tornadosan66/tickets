@@ -86,6 +86,7 @@ class DashBoardController extends Controller
         $ticket->descripcion = $request->desc;
         $ticket->area_id = $request->area;
         $ticket->responsable_id = $request->Usuarios;
+        $ticket->solicitante_id = Auth::id();
         $ticket->fecha_envio = $request->fecha_envio;
         $ticket->status_id = "1";
         $ticket->tiempo_realizar = $request->tiempo;
@@ -151,5 +152,14 @@ class DashBoardController extends Controller
         $user = User::where("area_id",$usuarios)->get();
         
         return response()->json($user->toArray());
+    }   
+
+     public function consulta_ticket($ticket)
+    {
+        $ticket = Ticket::where("id",$ticket)->first();
+        $ticket->setAttribute('correo',$ticket->solicitante->name);    
+     
+        
+        return response()->json($ticket->toArray());
     }
 }

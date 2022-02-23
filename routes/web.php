@@ -28,8 +28,6 @@ Route::resources([
 
 Route::get('/consulta/areas/{area}','App\Http\Controllers\DashBoardController@consulta_areas')->name('consulta.areas');
 Route::get('/consulta/user/{usuarios}','App\Http\Controllers\DashBoardController@usuarios')->name('user.usuario');
-Route::get('/', function () {
-    return view('dashboard');
-});
-
+Route::get('/consulta/ticket/{ticket}','App\Http\Controllers\DashBoardController@consulta_ticket')->name('consulta.ticket');
+Route::get('/','App\Http\Controllers\DashBoardController@Panel')->name('/');
 });

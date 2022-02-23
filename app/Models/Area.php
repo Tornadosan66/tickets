@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Planteles;
-use App\Models\Users;
+use App\Models\User;
 class Area extends Model
 {
     use HasFactory;
@@ -17,7 +17,7 @@ class Area extends Model
         return $this->belongsTo(Planteles::class,'id_plantel');
     }
      public function supervisor(){
-        return $this->belongsTo(Users::class,'id_supervisor_area');
+        return $this->belongsTo(User::class,'id_supervisor_area');
     }
 
 
