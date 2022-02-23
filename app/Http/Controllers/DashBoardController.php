@@ -9,6 +9,7 @@ use App\Models\Planteles;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Ticket;
+use App\Models\tickets_completados;
 
 class DashBoardController extends Controller
 {
@@ -94,6 +95,26 @@ class DashBoardController extends Controller
         $ticket->save();
 
         return redirect()->route('dashboard')->with('info','se hizo el ticket');
+    }
+
+    public function terminar(Request $request){
+
+        $ticket = Ticket::findorfail($request->id_ticket);
+        $ticket->fecha_completada = date("Y-m-d");
+        $ticket->status_id = 4;
+
+        $ticket->save();
+
+        $tic = new tickets_completados();
+        $tic->descripcion = $request->desc2;
+        $tic->ticket_id = $ticket->id;
+        $file = $request->file('file');
+        $nombre = $file->getClientOriginalName();
+        \Storage::disk('public')->put($nombre,  \File::get($file));
+
+        $tic->save();
+
+        return redirect()->route('dashboard')->with('info','se reviso el ticket');
     }
 
     /**

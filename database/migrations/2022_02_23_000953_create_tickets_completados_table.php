@@ -17,6 +17,7 @@ class CreateTicketsCompletadosTable extends Migration
             $table->id();
             $table->unsignedBigInteger('ticket_id');
             $table->string('descripcion');
+            $table->string('evidencia')->nullable();
             $table->timestamps();
         });
     }

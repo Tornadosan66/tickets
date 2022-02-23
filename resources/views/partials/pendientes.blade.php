@@ -44,11 +44,27 @@ Revisar</button></td>
          <label for="desc">Descripción a Realizar</label>
           <textarea id="desc" name="desc" placeholder="Descripción de la tarea" rows="3" cols="50" readonly></textarea>
         </div>
+        <form method="POST" action="{{ route('terminar.ticket') }}" aria-label="{{ __('ticket') }}" accept-charset="UTF-8" enctype="multipart/form-data">
+          @csrf
+          <input type="hidden" name="id_ticket" id="id_ticket"></input>
+        <div class="col-md-4">
+         <label for="desc2">Descripción que hizo</label>
+          <textarea id="desc2" name="desc2" placeholder="Descripción de lo que hizo" rows="3" cols="50"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label">Evidencia</label>
+          <div class="col-md-6">
+            <input type="file" class="form-control" name="file" >
+          </div>
+        </div>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
       </div>
+    </form>
     </div>
   </div>
 </div>
@@ -62,7 +78,7 @@ Revisar</button></td>
 
     var route = "/consulta/ticket/"+ $(this).val(); 
 
-   
+   $("#id_ticket").val($(this).val());
 
     $.get(route, function(res){
        //aqui va si si encuentra resultados
@@ -71,7 +87,7 @@ Revisar</button></td>
        $("#nombre_solicitante").val(res.correo);
        $("#fecha_solicitud").val(res.fecha_envio);
        $("#desc").text(res.descripcion);
-
+       
          
 
    
