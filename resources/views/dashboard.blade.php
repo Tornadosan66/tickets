@@ -180,7 +180,7 @@
 
     var route = "/consulta/ticket/"+ $(this).val(); 
 
-   $("#id_ticket").val($(this).val());
+   $("#id_ticket2").val($(this).val());
    $("#ligaDescarga").attr('href','ticket/'+ $(this).val());
 
     $.get(route, function(res){

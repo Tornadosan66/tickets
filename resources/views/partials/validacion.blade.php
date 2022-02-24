@@ -45,8 +45,7 @@ Revisar</button></td>@endcan
          <label for="descripcion">Descripción a Realizar</label>
           <textarea id="descripcion" name="descripcion" placeholder="Descripción de la tarea" rows="3" cols="50" readonly></textarea>
         </div>
-        <form method="POST" action="#" aria-label="{{ __('ticket') }}" accept-charset="UTF-8" enctype="multipart/form-data">
-          @csrf
+        
           <input type="hidden" name="id_ticket" id="id_ticket"></input>
         <div class="col-md-4">
          <label for="descripcion2">Descripción que hizo</label>
@@ -64,16 +63,40 @@ Revisar</button></td>@endcan
 
       </div>
       <div class="modal-footer">
+        <form method="POST" id="5" action="{{ route('terminar.ticket') }}" aria-label="{{ __('ticket') }}" enctype="multipart/form-data">
+          @csrf
+        <input type="hidden" name="id_ticket2" id="id_ticket2"></input>
+        <input type="hidden" name="status" id="status"></input>
+        <button type="button" id="1" value="1" class="btn btn-primary">Cancelar ticket</button>
+        <button type="button" id="2" value="2" class="btn btn-primary">Devolver</button>
+        <button type="button" id="3" value="3" class="btn btn-primary">Completado</button>
+        </form>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
       </div>
-    </form>
+    
     </div>
   </div>
 </div>
 
 
+<script type="text/javascript">
+  
+  $( "button#1" ).click(function() {
+    $("#status").val($(this).val());
+    $("#5").submit();
+});
 
+  $( "button#2" ).click(function() {
+  $("#status").val($(this).val());
+  $("#5").submit();
+});
+
+  $( "button#3" ).click(function() {
+  $("#status").val($(this).val());
+  $("#5").submit();
+});
+
+</script>
 
 
 <script defer src="{{asset('js/jquery/jquery.dataTables.min.js')}}" ></script>

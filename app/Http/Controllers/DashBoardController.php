@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Ticket;
 use App\Models\tickets_completados;
 use Illuminate\Support\Facades\DB;
+use App\Mail\EmergencyCallReceived;
+use Mail;
 
 class DashBoardController extends Controller
 {
@@ -93,6 +95,41 @@ class DashBoardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function terminar_ticket(Request $request)
+    {
+
+        $ticket = Ticket::findorfail($request->id_ticket2);
+
+        if($request->status == 1){
+            $ticket->status_id = 3;
+
+            $ticket->save();
+
+        }else if($request->status == 2){
+            $ticket->status_id = 1;
+            $ticket->tiempo_realizar = 1440;
+
+            $ticket->save();
+
+            $tic = tickets_completados::where('ticket_id',$request->id_ticket2)->first();
+            $public_path = public_path();
+            $nombre = $tic->evidencia;
+            $url = $public_path.'/storage/'.$nombre;
+            \Storage::disk('public')->delete($nombre);
+
+            $tic->delete();
+
+        }else if($request->status == 3){
+            $ticket->status_id = 2;
+
+            $ticket->save();
+
+        }
+        return redirect()->route('dashboard');
+
+    }
+
     public function create()
     {
         $planteles = Planteles::all();
@@ -118,8 +155,10 @@ class DashBoardController extends Controller
         $ticket->status_id = "1";
         $ticket->tiempo_realizar = $request->tiempo;
 
-        $ticket->save();
-
+        $ticket->save();    
+        $ticket->setAttribute('name',$ticket->responsable->name);
+         $mailable = new EmergencyCallReceived($ticket);
+         Mail::to($ticket->responsable->email)->send($mailable);
         return redirect()->route('dashboard')->with('info','se hizo el ticket');
     }
 
@@ -135,12 +174,16 @@ class DashBoardController extends Controller
         $tic->descripcion = $request->desc2;
         $tic->ticket_id = $ticket->id;
         $file = $request->file('file');
-        $nombre = $file->getClientOriginalName();
+        if($file){
+            $nombre = $file->getClientOriginalName();
+
         $public_path = public_path();
         $url = $public_path.'/storage/'.$nombre;
         //dd($url);
         \Storage::disk('public')->put($nombre,  \File::get($file));
         $tic->evidencia = $nombre;
+        }
+        
 
         $tic->save();
 
