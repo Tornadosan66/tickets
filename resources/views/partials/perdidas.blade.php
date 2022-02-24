@@ -1,4 +1,4 @@
-<table id="pendientesInfo" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+<table id="perdidasInfo" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
   <thead>
     <tr>
       <th>Descripcion</th>
@@ -8,7 +8,7 @@
     </tr>
   </thead>
     <tbody>
-      @foreach($pendientes as $ticket)          
+      @foreach($perdido as $ticket)          
       <tr>
         <td>{{$ticket->descripcion}}</td> <!--Descripcion-->
         <td>{{$ticket->fecha_envio}}</td> <!--Fecha que se asingno-->
@@ -79,7 +79,7 @@ Revisar</button></td>
 <script defer src="{{asset('js/jquery/responsive.bootstrap.min.js')}}" ></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#pendientesInfo').DataTable({
+        $('#perdidasInfo').DataTable({
             "language": {
                 "decimal": "",
                 "emptyTable": "No hay información",

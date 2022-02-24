@@ -10,9 +10,15 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Ticket;
 use App\Models\tickets_completados;
+use Illuminate\Support\Facades\DB;
 
 class DashBoardController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:planteles.index')->only('terminar');
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -60,7 +66,27 @@ class DashBoardController extends Controller
             $cancelado = Ticket::where('status_id', 3)->get();
         }
 
-        return view('dashboard',compact("pendientes", "completados", "cancelado"));
+        if($roles[0] == 'Usuario'){
+            $validacion = Ticket::where('status_id', 4)
+            ->where('responsable_id', $use->id)->get();
+        }else if($roles[0] == 'Supervisor'){
+            $validacion = Ticket::where('status_id', 4)
+            ->where('area_id', $use->area_id)->get();
+        }else if($roles[0] == 'Superusuario'){
+            $validacion = Ticket::where('status_id', 4)->get();
+        }
+
+        if($roles[0] == 'Usuario'){
+            $perdido = Ticket::where('status_id', 5)
+            ->where('responsable_id', $use->id)->get();
+        }else if($roles[0] == 'Supervisor'){
+            $perdido = Ticket::where('status_id', 5)
+            ->where('area_id', $use->area_id)->get();
+        }else if($roles[0] == 'Superusuario'){
+            $perdido = Ticket::where('status_id', 5)->get();
+        }
+
+        return view('dashboard',compact("pendientes", "completados", "cancelado", "validacion", "perdido"));
     }
     /**
      * Show the form for creating a new resource.
@@ -72,7 +98,7 @@ class DashBoardController extends Controller
         $planteles = Planteles::all();
         $areas = Area::all();
         $usuarios = User::all();
-        return view('Dash.Formulario', compact('planteles'), compact('areas'), compact('usuarios'));
+        return view('Dash.Formulario', compact('planteles', 'areas', 'usuarios'));
     }
 
     /**
@@ -110,7 +136,11 @@ class DashBoardController extends Controller
         $tic->ticket_id = $ticket->id;
         $file = $request->file('file');
         $nombre = $file->getClientOriginalName();
+        $public_path = public_path();
+        $url = $public_path.'/storage/'.$nombre;
+        //dd($url);
         \Storage::disk('public')->put($nombre,  \File::get($file));
+        $tic->evidencia = $nombre;
 
         $tic->save();
 
@@ -125,7 +155,20 @@ class DashBoardController extends Controller
      */
     public function show($id)
     {
-        
+        $ticket = tickets_completados::where('ticket_id', $id)->first();
+        $public_path = public_path();
+        $nombre = $ticket->evidencia;
+        $url = $public_path.'/storage/'.$nombre;
+        //dd($url);
+        if (\Storage::exists($url))
+        {
+            return response()->download($url);
+        }
+        else
+        {
+            echo "falle";
+        }
+
     }
 
     /**
@@ -177,9 +220,18 @@ class DashBoardController extends Controller
 
      public function consulta_ticket($ticket)
     {
+
         $ticket = Ticket::where("id",$ticket)->first();
-        $ticket->setAttribute('correo',$ticket->solicitante->name);    
-     
+        $test = tickets_completados::where('ticket_id',$ticket->id)->first();
+        $ticket->setAttribute('correo',$ticket->solicitante->name); 
+        if($test)
+        {
+            $ticket->setAttribute('evidencia',$test->evidencia);  
+        }
+        
+
+        
+
         
         return response()->json($ticket->toArray());
     }

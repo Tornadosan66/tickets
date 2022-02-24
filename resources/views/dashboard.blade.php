@@ -100,15 +100,82 @@
   <li class="nav-item">
     <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Canceladas</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-validation" role="tab" aria-controls="pills-validation" aria-selected="false">Validación</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-out" role="tab" aria-controls="pills-validation" aria-selected="false">Perdidas</a>
+  </li>
 </ul>
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">@include('partials.completadas')</div>
   <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">@include('partials.pendientes')</div>
   <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">@include('partials.canceladas')</div>
+  <div class="tab-pane fade" id="pills-validation" role="tabpanel" aria-labelledby="pills-contact-tab">@include('partials.validacion')</div>
+  <div class="tab-pane fade" id="pills-out" role="tabpanel" aria-labelledby="pills-contact-tab">@include('partials.perdidas')</div>
 </div>
 
     <!-- fin Nav -->
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        $( "button#modal" ).click(function() {
+
+    var route = "/consulta/ticket/"+ $(this).val(); 
+
+   $("#id_ticket").val($(this).val());
+
+    $.get(route, function(res){
+       //aqui va si si encuentra resultados
+   
+     
+       $("#nombre_solicitante").val(res.correo);
+       $("#fecha_solicitud").val(res.fecha_envio);
+       $("#desc").text(res.descripcion);
+       
+         
+
+   
+     
+    }).fail(function(res) {
+      // aqui si falla dejar vacio
+    });
+
+});
+  $('button#modal1').click(function() {
+
+    var route = "/consulta/ticket/"+ $(this).val(); 
+
+   $("#id_ticket").val($(this).val());
+   $("#ligaDescarga").attr('href','ticket/'+ $(this).val());
+
+    $.get(route, function(res){
+       //aqui va si si encuentra resultados
+   
+        console.log(res);
+       $("#nombre_solicitante2").val(res.correo);
+       $("#fecha_solicitud2").val(res.fecha_envio);
+       $("#descripcion").text(res.descripcion);
+
+       if(!res.evidencia)
+       {
+                $("#ligaDescarga").attr('hidden',true);
+       }
+       else
+       {
+        $("#ligaDescarga").attr('hidden',false);
+       }
+       
+         
+
+   
+     
+    }).fail(function(res) {
+      // aqui si falla dejar vacio
+    });
+
+});
+    </script>
 </x-app-layout>

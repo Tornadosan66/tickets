@@ -17,4 +17,5 @@ class Ticket extends Model
      public function solicitante(){
         return $this->belongsTo(User::class,'solicitante_id');
     }
+         
 }
