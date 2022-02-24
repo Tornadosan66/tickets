@@ -45,7 +45,7 @@ Revisar</button></td>@endcan
          <label for="descripcion">Descripción a Realizar</label>
           <textarea id="descripcion" name="descripcion" placeholder="Descripción de la tarea" rows="3" cols="50" readonly></textarea>
         </div>
-        <form method="POST" action="{{ route('terminar.ticket') }}" aria-label="{{ __('ticket') }}" accept-charset="UTF-8" enctype="multipart/form-data">
+        <form method="POST" action="#" aria-label="{{ __('ticket') }}" accept-charset="UTF-8" enctype="multipart/form-data">
           @csrf
           <input type="hidden" name="id_ticket" id="id_ticket"></input>
         <div class="col-md-4">

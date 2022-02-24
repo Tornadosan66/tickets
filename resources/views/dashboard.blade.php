@@ -54,6 +54,38 @@
                     </div>
                 </div>
 
+                <div class="w-full lg:w-1/5">
+                    <div class="widget w-full p-4 rounded-lg bg-white border-l-4 border-yellow-400">
+                        <div class="flex items-center">
+                            <div class="icon w-14 p-3.5 bg-yellow-400 text-white rounded-full mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" ><path d="M12,0A11.972,11.972,0,0,0,4,3.073V1A1,1,0,0,0,2,1V4A3,3,0,0,0,5,7H8A1,1,0,0,0,8,5H5a.854.854,0,0,1-.1-.021A9.987,9.987,0,1,1,2,12a1,1,0,0,0-2,0A12,12,0,1,0,12,0Z"/><path d="M12,6a1,1,0,0,0-1,1v5a1,1,0,0,0,.293.707l3,3a1,1,0,0,0,1.414-1.414L13,11.586V7A1,1,0,0,0,12,6Z"/></svg>
+                            </div>
+                            <div class="flex flex-col justify-center">
+                               
+                                    <div class="text-lg">{{$validacion->count()}}</div>
+                         
+                                <div class="text-sm text-gray-400">Validacion</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full lg:w-1/5">
+                    <div class="widget w-full p-4 rounded-lg bg-white border-l-4 border-red-400">
+                        <div class="flex items-center">
+                            <div class="icon w-14 p-3.5 bg-red-400 text-white rounded-full mr-3">
+                                <svg id="Layer_1" viewBox="0 0 24 24"  data-name="Layer 1"><path d="m23.957 16.457-3.043 3.043 3.043 3.043-1.414 1.414-3.043-3.043-3.043 3.043-1.414-1.414 3.043-3.043-3.043-3.043 1.414-1.414 3.043 3.043 3.043-3.043zm-21.957-4.457a10 10 0 1 1 19.949 1h2c.028-.331.051-.662.051-1a12 12 0 1 0 -12 12c.338 0 .669-.023 1-.051v-2a9.992 9.992 0 0 1 -11-9.949zm9-6v4.586l-2.707 2.707 1.414 1.414 3.293-3.293v-5.414z"/></svg>
+                            </div>
+                            <div class="flex flex-col justify-center">
+                               
+                                    <div class="text-lg">{{$perdido->count()}}</div>
+                         
+                                <div class="text-sm text-gray-400">Perdidos</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 
 
                 <div class="w-full lg:w-1/5">
@@ -158,6 +190,7 @@
        $("#nombre_solicitante2").val(res.correo);
        $("#fecha_solicitud2").val(res.fecha_envio);
        $("#descripcion").text(res.descripcion);
+       $("#descripcion2").text(res.descripcionCompletada);
 
        if(!res.evidencia)
        {

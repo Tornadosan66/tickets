@@ -50,13 +50,13 @@
                                         <label for="tiempo">Tiempo a realizar</label>
                                         <select  id="tiempo" name="tiempo" class="form-control selectpicker "data-live-search="true">
                                                 <option value="0"></option>
-                                                <option value="1">1 hora</option>
-                                                <option value="3">3 horas</option>
-                                                <option value="5">5 horas</option>
-                                                <option value="10">10 horas</option>
-                                                <option value="15">15 horas</option>
-                                                <option value="20">20 horas</option>
-                                                <option value="24">1 dia</option>
+                                                <option value="60">1 hora</option>
+                                                <option value="180">3 horas</option>
+                                                <option value="300">5 horas</option>
+                                                <option value="600">10 horas</option>
+                                                <option value="900">15 horas</option>
+                                                <option value="1200">20 horas</option>
+                                                <option value="1440">1 dia</option>
                                         </select>
                                     </div>
                                     <div class="col-md-5">

@@ -4,6 +4,7 @@
       <th>Descripcion</th>
       <th>Fecha que se asingno</th>
       <th>Asignada a </th>
+      <th>Tiempo Restaste para terminar </th>
       <th>Revisión</th>
     </tr>
   </thead>
@@ -13,6 +14,7 @@
         <td>{{$ticket->descripcion}}</td> <!--Descripcion-->
         <td>{{$ticket->fecha_envio}}</td> <!--Fecha que se asingno-->
         <td>{{$ticket->responsable->email}}</td> 
+        <td>{{date("i:s" , $ticket->tiempo_realizar) }}</td> 
         <td><button type="button" id="modal" class="btn btn-primary" value="{{$ticket->id}}" data-toggle="modal" data-target="#revision">
 Revisar</button></td>
       </tr>
@@ -44,7 +46,7 @@ Revisar</button></td>
          <label for="desc">Descripción a Realizar</label>
           <textarea id="desc" name="desc" placeholder="Descripción de la tarea" rows="3" cols="50" readonly></textarea>
         </div>
-        <form method="POST" action="{{ route('terminar.ticket') }}" aria-label="{{ __('ticket') }}" accept-charset="UTF-8" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('revision.ticket') }}" aria-label="{{ __('ticket') }}" accept-charset="UTF-8" enctype="multipart/form-data">
           @csrf
           <input type="hidden" name="id_ticket" id="id_ticket"></input>
         <div class="col-md-4">

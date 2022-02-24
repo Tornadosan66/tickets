@@ -123,7 +123,7 @@ class DashBoardController extends Controller
         return redirect()->route('dashboard')->with('info','se hizo el ticket');
     }
 
-    public function terminar(Request $request){
+    public function mandarRevision(Request $request){
 
         $ticket = Ticket::findorfail($request->id_ticket);
         $ticket->fecha_completada = date("Y-m-d");
@@ -160,14 +160,14 @@ class DashBoardController extends Controller
         $nombre = $ticket->evidencia;
         $url = $public_path.'/storage/'.$nombre;
         //dd($url);
-        if (\Storage::exists($url))
-        {
+        //if (\Storage::exists($url))
+        //{
             return response()->download($url);
-        }
-        else
-        {
-            echo "falle";
-        }
+        //}
+        //else
+        //{
+         //   echo "falle";
+       // }
 
     }
 
@@ -226,7 +226,8 @@ class DashBoardController extends Controller
         $ticket->setAttribute('correo',$ticket->solicitante->name); 
         if($test)
         {
-            $ticket->setAttribute('evidencia',$test->evidencia);  
+            $ticket->setAttribute('evidencia',$test->evidencia);
+            $ticket->setAttribute('descripcionCompletada',$test->descripcion);  
         }
         
 
