@@ -40,6 +40,9 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'users.edit'])->syncRoles([$role1,$role2]);
         Permission::create(['name' => 'users.destroy'])->syncRoles([$role1,$role2]);
 
+        Permission::create(['name' => 'supervisor.home'])->syncRoles([$role1,$role2]);
+
+
         
 
         

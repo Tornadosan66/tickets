@@ -24,6 +24,7 @@ Route::resources([
     'usuarios' => 'App\Http\Controllers\UserController',
     'areas' => 'App\Http\Controllers\AreasController',
     'ticket' => 'App\Http\Controllers\DashBoardController',
+    'supervision' => 'App\Http\Controllers\SupervisionController',
 ]);
 
 Route::get('/consulta/areas/{area}','App\Http\Controllers\DashBoardController@consulta_areas')->name('consulta.areas');

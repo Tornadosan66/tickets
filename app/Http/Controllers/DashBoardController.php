@@ -59,7 +59,7 @@ class DashBoardController extends Controller
         }
 
         if($roles[0] == 'Usuario'){
-            $cancelado = Ticket::where('status_id', 3)
+             $cancelado = Ticket::where('status_id', 3)
             ->where('responsable_id', $use->id)->get();
         }else if($roles[0] == 'Supervisor'){
             $cancelado = Ticket::where('status_id', 3)

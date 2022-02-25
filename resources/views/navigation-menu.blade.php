@@ -37,6 +37,13 @@
                     </x-jet-nav-link>
                 </div>
                 @endcan
+                @can('areas.home')
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('supervision.index') }}" :active="request()->routeIs('supervision.index')">
+                        {{ __('Supervision') }}
+                    </x-jet-nav-link>
+                </div>
+                @endcan
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
