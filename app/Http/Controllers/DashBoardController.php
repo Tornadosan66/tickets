@@ -18,7 +18,7 @@ class DashBoardController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:planteles.index')->only('terminar');
+        $this->middleware('can:planteles.index')->only('terminar_ticket');
 
     }
     /**
@@ -104,13 +104,13 @@ class DashBoardController extends Controller
         if($request->status == 1){
             $ticket->status_id = 3;
 
-            $ticket->save();
+            
 
         }else if($request->status == 2){
             $ticket->status_id = 1;
             $ticket->tiempo_realizar = 1440;
 
-            $ticket->save();
+            
 
             $tic = tickets_completados::where('ticket_id',$request->id_ticket2)->first();
             $public_path = public_path();
@@ -123,9 +123,10 @@ class DashBoardController extends Controller
         }else if($request->status == 3){
             $ticket->status_id = 2;
 
-            $ticket->save();
+            
 
         }
+        $ticket->save();
         return redirect()->route('dashboard');
 
     }
@@ -153,7 +154,7 @@ class DashBoardController extends Controller
         $ticket->solicitante_id = Auth::id();
         $ticket->fecha_envio = $request->fecha_envio;
         $ticket->status_id = "1";
-        $ticket->tiempo_realizar = $request->tiempo;
+        $ticket->tiempo_realizar = 1440;
 
         $ticket->save();    
 

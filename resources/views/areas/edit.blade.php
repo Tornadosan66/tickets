@@ -39,7 +39,11 @@
                                         <select  id="plantel" name="plantel" class="form-control selectpicker "data-live-search="true">
                                             @foreach($planteles as $plantel)
                                                 
-                                                <option value="{{$plantel->id}}">{{$plantel->nombre_plantel}}</option>
+                                               @if($areas->id_plantel == $plantel->id)
+                                                    <option selected value="{{$plantel->id}}">{{$plantel->nombre_plantel}}</option>
+                                                 @else
+                                                    <option value="{{$plantel->id}}">{{$plantel->nombre_plantel}}</option>
+                                                @endif
 
                                             @endforeach
                                         </select>
@@ -48,9 +52,11 @@
                                         <label for="supervisor">Supervisor</label>
                                         <select  id="supervisor" name="supervisor" class="form-control selectpicker "data-live-search="true">
                                             @foreach($usuarios as $usuario)
-
-                                                    <option value="{{$usuario->id}}">{{$usuario->name}}</option>
-
+                                            @if($usuario->id == $areas->id_supervisor_area)
+                                                <option selected value="{{$usuario->id}}">{{$usuario->name}}</option>
+                                            @else
+                                                 <option  value="{{$usuario->id}}">{{$usuario->name}}</option>
+                                             @endif 
                                             @endforeach
                                         </select>
                                     </div>
