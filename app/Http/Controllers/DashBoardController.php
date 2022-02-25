@@ -286,4 +286,28 @@ class DashBoardController extends Controller
         
         return response()->json($ticket->toArray());
     }
+
+
+    public function actualizar()
+    {
+        $idUse = Auth::id();
+        $use = new User();
+        $use = $use->where('id',$idUse)->first();
+
+        $roles = $use->getRoleNames();
+
+        if($roles[0] == 'Usuario'){
+            $pendientes = Ticket::where('status_id', 1)
+            ->where('responsable_id', $use->id)->get();
+        }else if($roles[0] == 'Supervisor'){
+            $pendientes = Ticket::where('status_id', 1)
+            ->where('area_id', $use->area_id)->get();
+        }else if($roles[0] == 'Superusuario'){
+            $pendientes = Ticket::where('status_id', 1)->get();
+        }
+        
+        return response()->json($pendientes, 200);
+    }   
+
+
 }

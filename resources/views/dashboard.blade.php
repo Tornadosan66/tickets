@@ -153,6 +153,16 @@
     </div>
 
     <script type="text/javascript">
+        $( document ).ready(function() {
+        setInterval(cargarTabla, 60000);//Cada 3 minutos (180 mil milisegundos)
+    });
+        function secondsToString(seconds) {
+  var hour = Math.floor(seconds / 60);
+  hour = (hour < 10)? '0' + hour : hour;
+  var second = seconds % 60;
+  second = (second < 10)? '0' + second : second;
+  return hour + ':' + second;
+}
         $( "button#modal" ).click(function() {
 
     var route = "/consulta/ticket/"+ $(this).val(); 
@@ -210,5 +220,29 @@
     });
 
 });
+
+  function cargarTabla(){
+        $.ajax({
+            url     : '{{ route('actualizar.ticket')}}',
+            method  : 'GET',
+            success : function(r){
+                let lista = r;
+                let htmlCode = ``;
+                let contador = 0;
+                $.each(lista, function(index, item){
+   
+                                
+                                console.log(item.tiempo_realizar)
+                       
+                                $("#tiempo"+contador).text(secondsToString(item.tiempo_realizar));
+                                contador++;
+                            });
+
+               // $('#id-mi-tabla tbody').html(htmlCode);
+            }
+        });
+    }
     </script>
+
+
 </x-app-layout>

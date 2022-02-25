@@ -33,4 +33,5 @@ Route::get('/consulta/ticket/{ticket}','App\Http\Controllers\DashBoardController
 Route::post('/consulta/ticket','App\Http\Controllers\DashBoardController@mandarRevision')->name('revision.ticket');
 Route::post('/terminar/ticket','App\Http\Controllers\DashBoardController@terminar_ticket')->name('terminar.ticket');
 Route::get('/','App\Http\Controllers\DashBoardController@Panel')->name('/');
+Route::get('/actualizar/ticket/','App\Http\Controllers\DashBoardController@actualizar')->name('actualizar.ticket');
 });
