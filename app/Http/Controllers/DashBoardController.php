@@ -156,9 +156,15 @@ class DashBoardController extends Controller
         $ticket->tiempo_realizar = $request->tiempo;
 
         $ticket->save();    
+
         $ticket->setAttribute('name',$ticket->responsable->name);
+        $ticket->setAttribute('solicitante',$ticket->solicitante->name);
          $mailable = new EmergencyCallReceived($ticket);
-         Mail::to($ticket->responsable->email)->send($mailable);
+         $correos = [];
+         $superVisorArea = Area::where('id',$ticket->area_id)->first();
+
+         array_push($correos,$ticket->responsable->email,$superVisorArea->supervisor->email);
+         Mail::to($correos)->send($mailable);
         return redirect()->route('dashboard')->with('info','se hizo el ticket');
     }
 
