@@ -42,6 +42,7 @@
                                         <label for="password">Contraseña</label>
                                         <input id="password" type="password" placeholder="Si no se desea cambiar dejar vacio" class="form-control" name="password"  maxlength="35" autofocus>
                                     </div>
+                                    @if(Auth::user()->getRoleNames()[0] == 'Superusuario')
                                     <div class="col-md-4">
                                         <label for="rol">Rol</label>
                                         <select  id="rol" name="rol" class="form-control selectpicker "data-live-search="true">
@@ -68,6 +69,8 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    @endif
+                                    
                                     <div class="col-md-4">
                                         <label for="area">Area</label>
                                         <select  id="area" name="area" class="form-control selectpicker "data-live-search="true">

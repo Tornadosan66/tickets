@@ -25,6 +25,7 @@ Route::resources([
     'areas' => 'App\Http\Controllers\AreasController',
     'ticket' => 'App\Http\Controllers\DashBoardController',
     'supervision' => 'App\Http\Controllers\SupervisionController',
+    'tareas' => 'App\Http\Controllers\TareasController',
 ]);
 
 Route::get('/consulta/areas/{area}','App\Http\Controllers\DashBoardController@consulta_areas')->name('consulta.areas');
@@ -34,4 +35,6 @@ Route::post('/consulta/ticket','App\Http\Controllers\DashBoardController@mandarR
 Route::post('/terminar/ticket','App\Http\Controllers\DashBoardController@terminar_ticket')->name('terminar.ticket');
 Route::get('/','App\Http\Controllers\DashBoardController@Panel')->name('/');
 Route::get('/actualizar/ticket/','App\Http\Controllers\DashBoardController@actualizar')->name('actualizar.ticket');
+
+Route::post('/reasignar/areas/','App\Http\Controllers\DashBoardController@re_asignar_ticket')->name('asignar.ticket');
 });

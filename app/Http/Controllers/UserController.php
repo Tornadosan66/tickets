@@ -48,7 +48,7 @@ class UserController extends Controller
             $usuarios = $usuarios->all();
         }else if($roles[0] == 'Supervisor'){
             $usuarios = new User();
-            $usuarios = $usuarios->where('area_id',$use->area_id)->get();
+            $usuarios = $usuarios->where('plantel_id',$use->plantel_id)->get();
         }
         
         return view('users.index',compact('usuarios'));
@@ -62,9 +62,19 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
-        $planteles = Planteles::all();
-        $areas = Area::all();
+            $idUse = Auth::id();
+            $use = new User();
+            $use = $use->where('id',$idUse)->first();
+            $rol = $use->getRoleNames();
+            $roles = Role::all();
+            $planteles = Planteles::all();
+
+        if($rol[0] == 'Superusuario'){
+            $areas = Area::all();
+        }else if($rol[0] == 'Supervisor'){
+            $areas = Area::where('id_plantel', $use->plantel_id)->get();
+            //dd($areas);
+        }
 
         return view('users.create',compact('roles','planteles','areas'));
     }
@@ -96,7 +106,7 @@ class UserController extends Controller
             $user->name =  $request->name;
             $user->email =  $request->email;
             $user->plantel_id = $use->plantel_id;
-            $user->area_id = $use->area_id;
+            $user->area_id = $request->area;
             $user->password = bcrypt($request->password);
 
             $user->save();
@@ -129,10 +139,21 @@ class UserController extends Controller
     public function edit($id)
     {  
         $usuarios = User::findorfail($id);
+
         $roles = Role::all();
         $planteles = Planteles::all();
-        $areas = Area::all();
+        $idUse = Auth::id();
+        $use = new User();
+        $use = $use->where('id',$idUse)->first();
+        $rol = $use->getRoleNames();
+
     
+        if($rol[0] == 'Superusuario'){
+            $areas = Area::all();
+        }else if($rol[0] == 'Supervisor'){
+            $areas = Area::where('id_plantel', $use->plantel_id)->get();
+            //dd($areas);
+        }
 
         return view('users.edit',compact('usuarios','roles','planteles','areas'));
     }
@@ -149,16 +170,22 @@ class UserController extends Controller
             $user = User::findorfail($id);
             $user->name =  $request->name;
             $user->email =  $request->email;
-            $user->plantel_id =  $request->plantel;
+            
             $user->area_id =  $request->area;
             if($request->password)
             {
                 $user->password = bcrypt($request->password);
-            }   
+            }
+            if($request->plantel){
+                $user->plantel_id =  $request->plantel;
+            }
+            if($request->rol){
+                $user->roles()->sync($request->rol);
+            }
 
             $user->save();
 
-            $user->roles()->sync($request->rol);
+            
 
             
             return redirect()->route('usuarios.index')->with('info','Se Actualizo correctamente');

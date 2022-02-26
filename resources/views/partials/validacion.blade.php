@@ -67,9 +67,15 @@ Revisar</button></td>@endcan
           @csrf
         <input type="hidden" name="id_ticket2" id="id_ticket2"></input>
         <input type="hidden" name="status" id="status"></input>
-        <button type="button" id="1" value="1" class="btn btn-primary">Cancelar ticket</button>
+        <button type="button" id="1" value="1" class="btn btn-primary">Cancelar</button>
         <button type="button" id="2" value="2" class="btn btn-primary">Devolver</button>
         <button type="button" id="3" value="3" class="btn btn-primary">Completado</button>
+        </form>
+        
+        <form method="POST" id="6" action="{{ route('asignar.ticket') }}" aria-label="{{ __('ticket') }}" enctype="multipart/form-data">
+          @csrf
+          <input type="hidden" name="id_reasignar" id="id_reasignar"></input>
+          <button type="submit" id="4" value="" class="btn btn-primary">Re-asignar</button>
         </form>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>

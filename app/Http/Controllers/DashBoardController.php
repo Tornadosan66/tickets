@@ -96,6 +96,16 @@ class DashBoardController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function re_asignar_ticket(Request $request)
+    {
+        $planteles = Planteles::all();
+        $areas = Area::all();
+        $usuarios = User::all();
+        $ticket = Ticket::findorfail($request->id_reasignar)->first();
+
+        return view('Dash.reasignar', compact("planteles", "areas", "usuarios", "ticket"));
+    }
+
     public function terminar_ticket(Request $request)
     {
 
@@ -241,7 +251,26 @@ class DashBoardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $ticket = Ticket::findorfail($id);
+        tickets_completados::where('ticket_id', $ticket->id)->delete();
+        $ticket->area_id = $request->area;
+        $ticket->responsable_id = $request->Usuarios;
+        $ticket->tiempo_realizar = 1440;
+        $ticket->status_id = 1;
+
+        $ticket->save();
+
+        $ticket->setAttribute('name',$ticket->responsable->name);
+        $ticket->setAttribute('solicitante',$ticket->solicitante->name);
+         $mailable = new EmergencyCallReceived($ticket);
+         $correos = [];
+         $superVisorArea = Area::where('id',$ticket->area_id)->first();
+
+         array_push($correos,$ticket->responsable->email,$superVisorArea->supervisor->email);
+         Mail::to($correos)->send($mailable);
+
+        return redirect()->route('dashboard')->with('info','Se re-asigno, una disculpa');
     }
 
     /**

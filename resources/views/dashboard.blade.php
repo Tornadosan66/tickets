@@ -158,9 +158,9 @@
     });
         function secondsToString(seconds) {
   var hour = Math.floor(seconds / 60);
-  hour = (hour < 10)? '0' + hour : hour;
+  hour = (hour < 1)? '0' + hour : hour;
   var second = seconds % 60;
-  second = (second < 10)? '0' + second : second;
+  second = (second < 1)? '0' + second : second;
   return hour + ':' + second;
 }
         $( "button#modal" ).click(function() {
@@ -191,6 +191,7 @@
     var route = "/consulta/ticket/"+ $(this).val(); 
 
    $("#id_ticket2").val($(this).val());
+   $("#id_reasignar").val($(this).val());
    $("#ligaDescarga").attr('href','ticket/'+ $(this).val());
 
     $.get(route, function(res){

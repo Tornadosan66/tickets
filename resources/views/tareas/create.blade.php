@@ -13,10 +13,10 @@
                     <div class="card" style="box-shadow: 0 5px 5px 0 rgba(0,0,0,0.5);">
                         <div class="card-header">
                             <center>
-                                <h3>Crear area</h3>
+                                <h3>Establecer tarea</h3>
                             </center>
                         </div>
-                        <form method="POST" action="{{ route('areas.store') }}" aria-label="{{ __('areas') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('tareas.store') }}" aria-label="{{ __('tareas') }}" enctype="multipart/form-data">
 
 
                             <div class="card-body">
@@ -25,34 +25,15 @@
                                     <div class="col-md-12">
                                         <br>
                                         <center>
-                                            <h4>Datos del area</h4>
+                                            <h4>Sobre la tarea</h4>
                                         </center>
                                     </div>
                                     
                                     <div class="col-md-4">
-                                        <label for="name">Nombre de area</label>
-                                        <input id="name" type="text" placeholder="Nombre del area" class="form-control" name="name" value="{{old('name')}}" maxlength="35" required autofocus>
+                                        <label for="tarea">Sobre la tarea</label>
+                                        <input id="tarea" type="text" placeholder="tarea" class="form-control" name="tarea" maxlength="35" required autofocus>
                                     </div>
-                                    <div class="col-md-4">
-                                        <label for="plantel">planteles</label>
-                                        <select  id="plantel" name="plantel" class="form-control selectpicker "data-live-search="true">
-                                            @foreach($planteles as $plantel)
-                                                <option value="{{$plantel->id}}">{{$plantel->nombre_plantel}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="supervisor">Supervisor</label>
-                                        <select  id="supervisor" name="supervisor" class="form-control selectpicker "data-live-search="true">
-                                            @foreach($usuarios as $usuario)
-                                                <option value="{{$usuario->id}}">{{$usuario->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="desc">Descripción</label>
-                                        <textarea id="desc" name="desc" placeholder="Descripción del area" rows="3" cols="100"></textarea>
-                                    </div>
+                                    
 
                                 </div>
 
@@ -65,7 +46,7 @@
                                         <button type="submit" id="guardar" class="btn btn-success">
                                             <i class="fas fa-save"></i>&nbsp;&nbsp;{{ __('Guardar') }}
                                         </button>
-                                        <a href="{{route('areas.index')}}">
+                                        <a href="{{route('tareas.index')}}">
                                             <button type="button" class="btn btn-default" >
                                                 <i class="fas fa-undo-alt"></i>&nbsp;&nbsp;{{ __('Regresar') }}
                                             </button>
@@ -88,7 +69,7 @@
 
                 <!-- (Optional) Latest compiled and minified JavaScript translation files -->
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
-                
+                <script defer src="{{asset('public/js/cliente/cliente.js')}}"></script>
 
                 <!--aqui termina -->
 

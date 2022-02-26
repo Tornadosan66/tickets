@@ -52,21 +52,27 @@
                                     <div class="col-md-4">
                                         <label for="plantel">Plantel</label>
                                         <select  id="plantel" name="plantel" class="form-control selectpicker "data-live-search="true">
+                                            <option value="">Seleciona una opción</option>
                                             @foreach($planteles as $plantel)
                                                 <option value="{{$plantel->id}}">{{$plantel->nombre_plantel}}</option>
                                                 
                                             @endforeach
                                         </select>
                                     </div>
+                                    @endif
+
                                     <div class="col-md-4">
                                         <label for="area">Area</label>
                                         <select  id="area" name="area" class="form-control selectpicker "data-live-search="true">
-                                            @foreach($areas as $area)
-                                                <option value="{{$area->id}}">{{$area->nombre_area}}</option>
-                                            @endforeach
+                                            <option value="">Seleciona una opción</option>
+                                            @if(Auth::user()->getRoleNames()[0] == 'Supervisor')
+                                                @foreach($areas as $area)
+                                                    <option value="{{$area->id}}">{{$area->nombre_area}}</option>
+                                                @endforeach
+                                            @endif
                                         </select>
                                     </div>
-                                    @endif
+                                    
                                 </div>
 
                             </div>
@@ -101,7 +107,33 @@
 
                 <!-- (Optional) Latest compiled and minified JavaScript translation files -->
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
-                <script defer src="{{asset('public/js/cliente/cliente.js')}}"></script>
+                <script type="text/javascript">
+                    $( "#plantel" ).change(function() {
+
+                    var route = "/consulta/areas/" + $('#plantel').val();
+
+                    $("#area option").remove()
+
+                    $("#area").append("<option value = 0>Seleciona una opcion</option>")
+                    $("#area").selectpicker('refresh');
+                    //value="res[i].">nombre_area</
+
+                    $.get(route, function(res){
+                    //aqui va si si encuentra resultados
+                    for( i = 0; i < res.length;i++){
+                        console.log("La fila  "+ res[i].nombre_area)
+
+
+                        $("#area").append("<option value = "+res[i].id+">"+res[i].nombre_area+"</option>")
+                    }
+                        $("#area").selectpicker('refresh');
+    
+                    }).fail(function(res) {
+                        // aqui si falla dejar vacio
+                    });
+
+                });
+                </script>
 
                 <!--aqui termina -->
 

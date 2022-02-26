@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-jet-application-mark class="block h-9 w-auto" />
+                        <img src="{{ asset('img/univer_log.png') }}" class="img" width="20%" height="20%">
                     </a>
                 </div>
 
@@ -41,6 +41,13 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('supervision.index') }}" :active="request()->routeIs('supervision.index')">
                         {{ __('Supervision') }}
+                    </x-jet-nav-link>
+                </div>
+                @endcan
+                @can('areas.home')
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('tareas.index') }}" :active="request()->routeIs('tareas.index')">
+                        {{ __('Tareas') }}
                     </x-jet-nav-link>
                 </div>
                 @endcan
