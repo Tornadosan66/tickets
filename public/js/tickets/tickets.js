@@ -4,14 +4,14 @@ $( "#plantel" ).change(function() {
 
     $("#area option").remove()
 
-     $("#area").append("<option>Seleciona una opcion</option>")
+     $("#area").append("<option value = ''>Seleciona una opcion</option>")
      $("#area").selectpicker('refresh');
     //value="res[i].">nombre_area</
 
     $.get(route, function(res){
        //aqui va si si encuentra resultados
        for( i = 0; i < res.length;i++){
-         console.log("La fila  "+ res[i].nombre_area)
+         
 
 
          $("#area").append("<option value = "+res[i].id+">"+res[i].nombre_area+"</option>")
@@ -27,7 +27,7 @@ $("#area").change(function(){
    var route = "/consulta/user/"+$('#area').val();
    var route2 = "/consulta/tareas/"+$('#area').val();
    $("#Usuarios option").remove()
-   $("#Usuarios").append("<option value = 0>Seleciona una opcion</option>")
+   $("#Usuarios").append("<option value = ''>Seleciona una opcion</option>")
    $("#Usuarios").selectpicker('refresh');
 
    $("#tareas option").remove()

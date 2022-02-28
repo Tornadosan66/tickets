@@ -55,7 +55,7 @@ Revisar</button></td>
           <input type="hidden" name="id_ticket" id="id_ticket"></input>
         <div class="col-md-4">
          <label for="desc2">Descripción que hizo</label>
-          <textarea id="desc2" name="desc2" placeholder="Descripción de lo que hizo" rows="3" cols="50"></textarea>
+          <textarea id="desc2" name="desc2" placeholder="Descripción de lo que hizo" rows="3" cols="50" required autofocus></textarea>
         </div>
 
         <div class="form-group">

@@ -43,7 +43,13 @@ class TareasController extends Controller
         $idUse = Auth::id();
         $use = new User();
         $use = $use->where('id',$idUse)->first();
-        $areas = Area::where('id_plantel',$use->plantel_id)->get();
+        if($use->plantel_id == 1)
+        {
+            $areas = Area::where('id',$use->area_id)->get();
+        }else{
+            $areas = Area::where('id_plantel',$use->plantel_id)->get();
+        }
+        
 
 
         return view('tareas.create',compact('areas'));
@@ -91,7 +97,12 @@ class TareasController extends Controller
      $idUse = Auth::id();
      $use = new User();
      $use = $use->where('id',$idUse)->first();
-     $areas = Area::where('id_plantel',$use->plantel_id)->get();
+     if($use->plantel_id == 1)
+     {
+        $areas = Area::where('id',$use->area_id)->get();
+     }else{
+        $areas = Area::where('id_plantel',$use->plantel_id)->get();
+    }
      $usuarios = User::where('area_id',$use->area_id)->get();
 
      return view('tareas.edit',compact('tarea','areas','usuarios'));

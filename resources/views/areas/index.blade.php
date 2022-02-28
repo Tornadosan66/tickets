@@ -20,21 +20,26 @@
                         </div>
                         <div class="card-body">
                            @can('areas.create')
+                           @if(Auth::user()->plantel_id != '1' ||  Auth::user()->id == 1)
                                 <h3>
                                     <a href="{{route('areas.create')}}" style="color:#037DB4;"><i class="far fa-plus-square"></i>&nbsp;&nbsp;Areas</a>
                                 </h3>
+                                @endif
                          @endcan
                             <table id="personalInfo" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
                                 <thead>
                                 <tr>
                                     <th>Areas</th>
                                     <th>plantel</th>
+                                    <th>Supervisor</th>
                                     @can('areas.edit')
+                                     @if(Auth::user()->plantel_id != '1' || Auth::user()->id == 1)
                                     <th>Editar</th>
                                     @endcan
                                     @can('areas.destroy')
                                     <th>Eliminar</th>
                                     @endcan
+                                    @endif
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -42,7 +47,9 @@
                                     <tr>
                                         <td>{{$area->nombre_area}}</td>
                                         <td>{{$area->planteles->nombre_plantel}}</td>
+                                        <td>{{$area->supervisor->name}}</td>
                                             @can('areas.edit')
+                                            @if(Auth::user()->plantel_id != '1' || Auth::user()->id == 1)
                                             <td>
                                                 <a href="{{route('areas.edit',$area->id)}}">
                                                     <button class="btn btn-primary">
@@ -68,6 +75,7 @@
                                                 </form>
                                             </td>
                                             @endcan
+                                            @endif
                                     </tr>
                                     @endforeach
                                 </tbody>

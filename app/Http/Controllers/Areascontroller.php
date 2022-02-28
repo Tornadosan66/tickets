@@ -56,6 +56,10 @@ class Areascontroller extends Controller
      */
     public function create()
     {
+        if(Auth::user()->plantel_id == '1' && Auth::user()->id != '1')
+        {
+             abort(403);
+        }
         $usuarios = DB::table('users')->join('model_has_roles','model_id' ,'=', 'users.id')->select('users.id', 'users.name')->whereNull('deleted_at')->where('model_has_roles.role_id', '<', 3)->get();
         $planteles = new Planteles();
         $planteles = $planteles->all();
@@ -111,6 +115,10 @@ class Areascontroller extends Controller
      */
     public function edit($id)
     {
+                if(Auth::user()->plantel_id == '1' && Auth::user()->id != '1')
+        {
+             abort(403);
+        }
         $usuarios = DB::table('users')->join('model_has_roles','model_id' ,'=', 'users.id')->select('users.id', 'users.name')->whereNull('deleted_at')->where('model_has_roles.role_id', '<', 3)->get();
         $planteles = new Planteles();
         $planteles = $planteles->all();

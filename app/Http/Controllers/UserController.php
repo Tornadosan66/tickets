@@ -48,7 +48,14 @@ class UserController extends Controller
             $usuarios = $usuarios->all();
         }else if($roles[0] == 'Supervisor'){
             $usuarios = new User();
-            $usuarios = $usuarios->where('plantel_id',$use->plantel_id)->get();
+            if($use->plantel_id == 1){
+                $usuarios = $usuarios->where('plantel_id',$use->plantel_id)->where('area_id',$use->area_id)->get();    
+            }
+            else
+            {
+                $usuarios = $usuarios->where('plantel_id',$use->plantel_id)->get();    
+            }
+            
         }
         
         return view('users.index',compact('usuarios'));
@@ -72,7 +79,15 @@ class UserController extends Controller
         if($rol[0] == 'Superusuario'){
             $areas = Area::all();
         }else if($rol[0] == 'Supervisor'){
-            $areas = Area::where('id_plantel', $use->plantel_id)->get();
+            if($use->plantel_id == 1){
+            
+                $areas = Area::where('id', $use->area_id)->get();
+            }
+            else
+            {
+                $areas = Area::where('id_plantel', $use->plantel_id)->get();    
+            }
+            
             //dd($areas);
         }
 
@@ -151,7 +166,12 @@ class UserController extends Controller
         if($rol[0] == 'Superusuario'){
             $areas = Area::all();
         }else if($rol[0] == 'Supervisor'){
-            $areas = Area::where('id_plantel', $use->plantel_id)->get();
+            if($use->plantel_id == 1){
+                $areas = Area::where('id', $use->area_id)->get();
+            }else{
+                $areas = Area::where('id_plantel', $use->plantel_id)->get();
+            }
+            
             //dd($areas);
         }
 
