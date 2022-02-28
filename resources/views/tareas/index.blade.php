@@ -34,15 +34,20 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                     @foreach($tareas as $tarea)
                                
                                     <tr>
 
-                                        <td></td>
-                                        <td></td>
+
+                                        <td>{{$tarea->tarea}}</td>
+
+
+
+                                        <td>{{$tarea->area->nombre_area}}</td>
 
                                        
                                             <td>
-                                                <a href="#">
+                                                <a href="{{route('tareas.edit',$tarea->id)}}">
                                                     <button class="btn btn-primary">
                                                         <i class="fas fa-edit"></i>
                                                     </button>
@@ -52,10 +57,11 @@
                                        
                                             <td>
                                                 <form method="POST" id="formEliminar" action="" aria-label="{{ __('Usuario') }}" enctype="multipart/form-data">
-                                                    @method('delete')
+                                                  @method('DELETE')
                                                     @csrf
                                                     
-                                                    <button type="button" id="borrar" value="#" name="borrar" class="btn btn-danger"
+                                                
+                                                    <button type="button" id="borrar" value="{{route('tareas.destroy',$tarea->id)}}" name="borrar" class="btn btn-danger"
                                                             onclick="  var r = confirm('Estas seguro que deseas Eliminarlo?');
                                                     if (r == true) {
                                                         $('#formEliminar').attr('action',this.value).submit();
@@ -68,6 +74,8 @@
                                             </td>
                                         
                                     </tr>
+                                    @endforeach
+
                                 </tbody>
                             </table>
                         </div>

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tareas;
-
+use App\Models\Area;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 class TareasController extends Controller
 {
     /**
@@ -15,8 +17,10 @@ class TareasController extends Controller
     public function index()
     {
         
-
-        return view('tareas.index');
+        $tareas = new Tareas();
+        $tareas = $tareas->all();
+        return view('tareas.index',compact('tareas'));
+        
     }
 
     /**
@@ -26,7 +30,13 @@ class TareasController extends Controller
      */
     public function create()
     {
-        //
+        $idUse = Auth::id();
+        $use = new User();
+        $use = $use->where('id',$idUse)->first();
+        $areas = Area::where('id_plantel',$use->plantel_id)->get();
+
+
+        return view('tareas.create',compact('areas'));
     }
 
     /**
@@ -37,7 +47,15 @@ class TareasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tarea = new Tareas();
+        $tarea->tarea =  $request->tarea;
+        $tarea->id_area=  $request->area;
+        $tarea->id_user =  $request->Usuarios;
+
+        $tarea->save();
+
+        return redirect()->route('tareas.index')->with('info','Se creo correctamente');
+        
     }
 
     /**
@@ -59,7 +77,14 @@ class TareasController extends Controller
      */
     public function edit($id)
     {
-        //
+     $tarea = Tareas::findorfail($id);
+     $idUse = Auth::id();
+     $use = new User();
+     $use = $use->where('id',$idUse)->first();
+     $areas = Area::where('id_plantel',$use->plantel_id)->get();
+     $usuarios = User::where('area_id',$use->area_id)->get();
+
+     return view('tareas.edit',compact('tarea','areas','usuarios'));
     }
 
     /**
@@ -71,7 +96,14 @@ class TareasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $tarea = Tareas::findorfail($id);
+        $tarea->tarea =  $request->name;
+        $tarea->id_area =  $request->area;
+        $tarea->id_user = $request->Usuarios;
+
+        $tarea->save();
+
+        return redirect()->route('tareas.index')->with('info','Se modofico la tarea');
     }
 
     /**
@@ -82,6 +114,7 @@ class TareasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tarea = Tareas::findorfail($id)->delete();
+        
     }
 }

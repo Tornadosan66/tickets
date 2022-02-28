@@ -4,7 +4,7 @@ $( "#plantel" ).change(function() {
 
     $("#area option").remove()
 
-     $("#area").append("<option value = 0>Seleciona una opcion</option>")
+     $("#area").append("<option>Seleciona una opcion</option>")
      $("#area").selectpicker('refresh');
     //value="res[i].">nombre_area</
 
