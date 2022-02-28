@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
         'plantel_id' => 1
 
         ])->assignRole('Superusuario');
-
+/*
              User::create([
         'name' => 'carlos',
         'email' => 'carlos@test.com',
@@ -70,7 +70,7 @@ class UserSeeder extends Seeder
         ])->assignRole('Usuario');
 
 
-
+*/
 
         Planteles::create([
 
@@ -82,6 +82,9 @@ class UserSeeder extends Seeder
             'id_plantel' => 1,
             'id_supervisor_area' => 1
         ]);
+
+         
+         /*
                   Area::create([
 
             'nombre_area' => 'Archivo',
@@ -109,6 +112,6 @@ class UserSeeder extends Seeder
             
         ]);
         
-  
+  */
     }
 }

@@ -32,7 +32,9 @@
                                     <div class="col-md-4">
                                         <label for="name">Nombre de area</label>
                                         <input id="name" type="text" placeholder="Nombre del area" class="form-control" name="name" value="{{old('name')}}" maxlength="35" required autofocus>
+
                                     </div>
+                                     @if(Auth::user()->getRoleNames()[0] == 'Superusuario')
                                     <div class="col-md-4">
                                         <label for="plantel">planteles</label>
                                         <select  id="plantel" name="plantel" class="form-control selectpicker "data-live-search="true">
@@ -47,11 +49,13 @@
                                             @foreach($usuarios as $usuario)
                                                 <option value="{{$usuario->id}}">{{$usuario->name}}</option>
                                             @endforeach
+
                                         </select>
                                     </div>
+                                    @endif
                                     <div class="col-md-4">
                                         <label for="desc">Descripción</label>
-                                        <textarea id="desc" name="desc" placeholder="Descripción del area" rows="3" cols="100"></textarea>
+                                        <textarea id="desc" name="desc" placeholder="Descripción del area" rows="3" cols="80"></textarea>
                                     </div>
 
                                 </div>

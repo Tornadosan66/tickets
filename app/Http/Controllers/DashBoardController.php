@@ -166,6 +166,7 @@ class DashBoardController extends Controller
         $ticket->fecha_envio = $request->fecha_envio;
         $ticket->status_id = "1";
         $ticket->tiempo_realizar = 1440;
+        $ticket->tarea_id = $request->tareas;
 
         $ticket->save();    
 
@@ -314,13 +315,16 @@ class DashBoardController extends Controller
         $test = tickets_completados::where('ticket_id',$ticket->id)->first();
         $tarea = Tareas::where('id',$ticket->tarea_id)->first();
         $ticket->setAttribute('correo',$ticket->solicitante->name);
-        $ticket->setAttribute('tarea',$tarea->tarea); 
+         
         if($test)
         {
             $ticket->setAttribute('evidencia',$test->evidencia);
             $ticket->setAttribute('descripcionCompletada',$test->descripcion);  
         }
-        
+        if($tarea)
+        {
+            $ticket->setAttribute('tarea',$tarea->tarea);
+        }        
 
         
 

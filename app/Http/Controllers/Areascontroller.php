@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Planteles;
 use App\Models\Area;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Areascontroller extends Controller
@@ -25,8 +26,26 @@ class Areascontroller extends Controller
      */
     public function index()
     {
-        $areas = new Area();
-        $areas = $areas->all();
+        $idUse = Auth::id();
+
+        $use = new User();
+        $use = $use->where('id',$idUse)->first();
+
+        
+
+        $roles = $use->getRoleNames(); 
+        //$nombres = $use->gethostname();
+        //dd($nombres);
+
+        if($roles[0] == 'Superusuario'){
+            //dd($roles);
+            $areas = new Area();
+            $areas = $areas->all();
+        }else if($roles[0] == 'Supervisor'){
+            $areas = new Area();
+            $areas = $areas->where('id_plantel',$use->plantel_id)->get();
+        }
+
         return view('areas.index',compact('areas'));
     }
 
@@ -54,8 +73,18 @@ class Areascontroller extends Controller
     {
         $area = new Area();
         $area->nombre_area =  $request->name;
-        $area->id_plantel =  $request->plantel;
-        $area->id_supervisor_area =  $request->supervisor;
+        if(Auth::user()->getRoleNames()[0] == "Supervisor")
+        {
+            $area->id_plantel =  Auth::user()->plantel_id;
+            $area->id_supervisor_area =  Auth::user()->id;
+        }
+        else
+        {
+            $area->id_plantel =  $request->plantel;
+            $area->id_supervisor_area =  $request->supervisor;
+        }
+        
+       
         $area->descripcion =  $request->desc;
 
         $area->save();
@@ -86,6 +115,7 @@ class Areascontroller extends Controller
         $planteles = new Planteles();
         $planteles = $planteles->all();
         $areas = Area::findorfail($id);
+
         return view('areas.edit',compact('areas','usuarios','planteles'));
     }
 
@@ -100,8 +130,17 @@ class Areascontroller extends Controller
     {
         $area = Area::findorfail($id);
         $area->nombre_area =  $request->name;
-        $area->id_plantel =  $request->plantel;
-        $area->id_supervisor_area = $request->supervisor;
+
+        if(Auth::user()->getRoleNames()[0] == "Supervisor"){
+            $area->id_plantel =  Auth::user()->plantel_id;
+            $area->id_supervisor_area =  Auth::user()->id;
+        }else{
+            $area->id_plantel =  $request->plantel;
+            $area->id_supervisor_area =  $request->supervisor;
+        }
+
+        //$area->id_plantel =  $request->plantel;
+        //$area->id_supervisor_area = $request->supervisor;
         $area->descripcion =  $request->desc;
 
         $area->save();

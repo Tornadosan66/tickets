@@ -37,6 +37,7 @@
                                     <div class="col-md-4">
                                         <label for="area">Area</label>
                                         <select  id="area" name="area" class="form-control selectpicker "data-live-search="true">
+                                            <option>Seleciona una opción</option>
                                             @foreach($areas as $area)
                                                 
                                                @if($area->id == $tarea->id_area)
@@ -45,18 +46,21 @@
                                                     <option value="{{$area->id}}">{{$area->nombre_area}}</option>
                                                 @endif
 
+
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="Usuarios">Usuario</label>
                                         <select  id="Usuarios" name="Usuarios" class="form-control selectpicker "data-live-search="true">
+                                         <option>Seleciona una opción</option>
                                             @foreach($usuarios as $usuario)
                                             @if($usuario->id == $tarea->id_user)
                                                 <option selected value="{{$usuario->id}}">{{$usuario->name}}</option>
                                             @else
                                                  <option  value="{{$usuario->id}}">{{$usuario->name}}</option>
                                              @endif 
+
                                             @endforeach
                                         </select>
                                     </div>

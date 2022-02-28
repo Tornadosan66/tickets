@@ -45,7 +45,10 @@ Revisar</button></td>@endcan
          <label for="descripcion">Descripción a Realizar</label>
           <textarea id="descripcion" name="descripcion" placeholder="Descripción de la tarea" rows="3" cols="50" readonly></textarea>
         </div>
-        
+        <div class="col-md-6">
+         <label for="tarea2">Tarea</label>
+          <input id="tarea2" type="text" placeholder="Tarea" class="form-control" name="tarea2" value="" maxlength="35" readonly>
+        </div>
           <input type="hidden" name="id_ticket" id="id_ticket"></input>
         <div class="col-md-4">
          <label for="descripcion2">Descripción que hizo</label>

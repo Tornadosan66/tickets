@@ -203,6 +203,7 @@
        $("#fecha_solicitud2").val(res.fecha_envio);
        $("#descripcion").text(res.descripcion);
        $("#descripcion2").text(res.descripcionCompletada);
+       $("#tarea2").val(res.tarea);
 
        if(!res.evidencia)
        {
