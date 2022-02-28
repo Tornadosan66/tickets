@@ -13,6 +13,7 @@ use App\Models\tickets_completados;
 use Illuminate\Support\Facades\DB;
 use App\Mail\EmergencyCallReceived;
 use Mail;
+use App\Models\Tareas;
 
 class DashBoardController extends Controller
 {
@@ -175,7 +176,7 @@ class DashBoardController extends Controller
          $superVisorArea = Area::where('id',$ticket->area_id)->first();
 
          array_push($correos,$ticket->responsable->email,$superVisorArea->supervisor->email);
-         Mail::to($correos)->send($mailable);
+         //Mail::to($correos)->send($mailable);
         return redirect()->route('dashboard')->with('info','se hizo el ticket');
     }
 
@@ -297,12 +298,23 @@ class DashBoardController extends Controller
         return response()->json($user->toArray());
     }   
 
+
+     public function tareas($tareas)
+    {
+        $tareas = Tareas::where("id_area",$tareas)->get();
+        
+        return response()->json($tareas->toArray());
+    }   
+
+
      public function consulta_ticket($ticket)
     {
 
         $ticket = Ticket::where("id",$ticket)->first();
         $test = tickets_completados::where('ticket_id',$ticket->id)->first();
-        $ticket->setAttribute('correo',$ticket->solicitante->name); 
+        $tarea = Tareas::where('id',$ticket->tarea_id)->first();
+        $ticket->setAttribute('correo',$ticket->solicitante->name);
+        $ticket->setAttribute('tarea',$tarea->tarea); 
         if($test)
         {
             $ticket->setAttribute('evidencia',$test->evidencia);

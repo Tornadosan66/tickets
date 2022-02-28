@@ -175,6 +175,7 @@
      
        $("#nombre_solicitante").val(res.correo);
        $("#fecha_solicitud").val(res.fecha_envio);
+       $("#tarea").val(res.tarea);
        $("#desc").text(res.descripcion);
        
          

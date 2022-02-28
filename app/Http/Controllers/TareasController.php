@@ -14,6 +14,16 @@ class TareasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+           public function __construct()
+    {
+        $this->middleware('can:tareas.index')->only('index');
+        $this->middleware('can:tareas.edit')->only('edit','update');
+        $this->middleware('can:tareas.create')->only('create','store');
+        $this->middleware('can:tareas.destroy')->only('destroy');
+
+    }
     public function index()
     {
         

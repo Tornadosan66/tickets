@@ -37,4 +37,5 @@ Route::get('/','App\Http\Controllers\DashBoardController@Panel')->name('/');
 Route::get('/actualizar/ticket/','App\Http\Controllers\DashBoardController@actualizar')->name('actualizar.ticket');
 
 Route::post('/reasignar/areas/','App\Http\Controllers\DashBoardController@re_asignar_ticket')->name('asignar.ticket');
+Route::get('/consulta/tareas/{tareas}','App\Http\Controllers\DashBoardController@tareas')->name('consulta.tareas');
 });

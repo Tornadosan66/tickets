@@ -42,6 +42,10 @@ Revisar</button></td>
          <label for="fecha_solicitud">Fecha de solicitud</label>
           <input id="fecha_solicitud" type="date" class="form-control" name="fecha_solicitud" readonly>
         </div>
+        <div class="col-md-6">
+         <label for="tarea">Tarea</label>
+          <input id="tarea" type="text" placeholder="Tarea" class="form-control" name="tarea" value="" maxlength="35" readonly>
+        </div>
         <div class="col-md-4">
          <label for="desc">Descripción a Realizar</label>
           <textarea id="desc" name="desc" placeholder="Descripción de la tarea" rows="3" cols="50" readonly></textarea>

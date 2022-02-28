@@ -41,6 +41,12 @@
                                         </select>
                                     </div>
                                     <div class="col-md-3">
+                                        <label for="tareas">Tareas</label>
+                                        <select  id="tareas" name="tareas" class="form-control selectpicker "data-live-search="true">
+                                                <option value="0">Seleciona una opcion</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
                                         <label for="Usuarios">Usuarios</label>
                                         <select  id="Usuarios" name="Usuarios" class="form-control selectpicker "data-live-search="true">
                                                 <option value="0">Seleciona una opcion</option>
