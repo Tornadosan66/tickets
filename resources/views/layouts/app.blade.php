@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="{{asset('/bootstrap4/dist/css/bootstrap.min.css')}}" crossorigin="anonymous">
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="{{asset('/menu/style5.css')}}">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('/img/univer_log.png') }}">
+    <link rel="shortcut icon" sizes="192x192" href="{{ asset('/img/univer_log.png') }}">
     <script src="{{asset('/js/jquery/jquery-3.3.1.slim.min.js')}}" crossorigin="anonymous"></script>
     <!-- Popper.JS -->
     <script src="{{asset('/js/popper/popper.min.js')}}" crossorigin="anonymous"></script>
@@ -26,7 +28,7 @@
         });
     </script>
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'Univer') }}</title>
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
