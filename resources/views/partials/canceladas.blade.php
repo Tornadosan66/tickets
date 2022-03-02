@@ -11,7 +11,11 @@
       <tr>
         <td>{{$ticket->descripcion}}</td> <!--Descripcion-->
         <td>{{$ticket->fecha_envio}}</td> <!--Fecha que se asingno-->  
-        <td>{{$ticket->email}}</td>         
+        @if(Auth::user()->getRoleNames()[0] == 'Superusuario')
+        <td>{{$ticket->responsable->email}}</td> 
+        @else
+        <td>{{$ticket->email}}</td> 
+        @endif        
       </tr>
       @endforeach
     </tbody>
