@@ -43,8 +43,16 @@ class DashBoardController extends Controller
             $pendientes = Ticket::where('status_id', 1)
             ->where('responsable_id', $use->id)->get();
         }else if($roles[0] == 'Supervisor'){
-            $pendientes = Ticket::where('status_id', 1)
-            ->where('area_id', $use->area_id)->get();
+                $pendientes = DB::table('tickets')
+             ->join('areas', function ($join){
+                 $join->on('tickets.area_id', '=', 'areas.id');
+                 })->join('users', function ($join){
+                 $join->on('tickets.responsable_id', '=', 'users.id');
+             })->select('tickets.*','users.email')->where('areas.id_supervisor_area',$use->id)->where('status_id',1)->get();
+
+
+      
+
         }else if($roles[0] == 'Superusuario'){
             $pendientes = Ticket::where('status_id', 1)->get();
         }
@@ -177,7 +185,7 @@ class DashBoardController extends Controller
          $superVisorArea = Area::where('id',$ticket->area_id)->first();
 
          array_push($correos,$ticket->responsable->email,$superVisorArea->supervisor->email);
-         Mail::to($correos)->send($mailable);
+         //Mail::to($correos)->send($mailable);
         return redirect()->route('dashboard')->with('info','se hizo el ticket');
     }
 
