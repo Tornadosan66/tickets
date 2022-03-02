@@ -194,7 +194,7 @@ class DashBoardController extends Controller
         $tic->ticket_id = $ticket->id;
         $file = $request->file('file');
         if($file){
-            $nombre = $file->getClientOriginalName();
+            $nombre = 'ticket'.$ticket->id."-".$file->getClientOriginalName();
 
         $public_path = public_path();
         $url = $public_path.'/storage/'.$nombre;
