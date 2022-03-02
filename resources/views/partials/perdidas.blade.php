@@ -12,7 +12,7 @@
       <tr>
         <td>{{$ticket->descripcion}}</td> <!--Descripcion-->
         <td>{{$ticket->fecha_envio}}</td> <!--Fecha que se asingno-->
-        <td>{{$ticket->responsable->email}}</td> 
+        <td>{{$ticket->email}}</td> 
         <td><button type="button" id="modal" class="btn btn-primary" value="{{$ticket->id}}" data-toggle="modal" data-target="#revision">
 Revisar</button></td>
       </tr>

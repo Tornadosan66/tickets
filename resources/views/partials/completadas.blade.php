@@ -13,7 +13,7 @@
         <td>{{$ticket->descripcion}}</td> <!--Descripcion-->
         <td>{{$ticket->fecha_envio}}</td> <!--Fecha que se asingno-->
         <td>{{$ticket->fecha_completada}}</td> <!--Fecha que se realizo-->       
-        <td>{{$ticket->responsable->email}}</td>      
+        <td>{{$ticket->email}}</td>      
       </tr>
       @endforeach
     </tbody>

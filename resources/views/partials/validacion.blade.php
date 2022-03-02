@@ -12,7 +12,7 @@
       <tr>
         <td>{{$ticket->descripcion}}</td> <!--Descripcion-->
         <td>{{$ticket->fecha_envio}}</td> <!--Fecha que se asingno-->
-        <td>{{$ticket->responsable->email}}</td> 
+        <td>{{$ticket->email}}</td> 
         @can('planteles.index')
         <td><button type="button" id="modal1" class="btn btn-primary" value="{{$ticket->id}}" data-toggle="modal" data-target="#validacion">
 Revisar</button></td>@endcan
