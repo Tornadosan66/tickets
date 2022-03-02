@@ -12,7 +12,7 @@
       <tr>
         <td>{{$ticket->descripcion}}</td> <!--Descripcion-->
         <td>{{$ticket->fecha_envio}}</td> <!--Fecha que se asingno-->
-        @if(Auth::user()->getRoleNames()[0] == 'Superusuario')
+        @if(Auth::user()->getRoleNames()[0] == 'Superusuario' || Auth::user()->getRoleNames()[0] == 'Usuario')
         <td>{{$ticket->responsable->email}}</td> 
         @else
         <td>{{$ticket->email}}</td> 
