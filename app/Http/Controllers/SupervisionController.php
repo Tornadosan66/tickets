@@ -7,6 +7,7 @@ use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Ticket;
+use Illuminate\Support\Facades\DB;
 
 class SupervisionController extends Controller
 {
@@ -36,8 +37,12 @@ class SupervisionController extends Controller
         $supervision = $supervision->all();
         }
              if($roles[0] == 'Supervisor'){
-                $supervision = new User();
-          $supervision = $supervision->where('area_id',$use->area_id) ->get();
+                $supervision = DB::table('tickets')
+             ->join('areas', function ($join){
+                 $join->on('tickets.area_id', '=', 'areas.id');
+                 })->join('users', function ($join){
+                 $join->on('tickets.responsable_id', '=', 'users.id');
+             })->select('users.*')->where('areas.id_supervisor_area',$use->id)->orWhere('users.supervisor_rectoria',$idUse)->get();
          
         }
 
