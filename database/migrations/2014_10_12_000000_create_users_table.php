@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('profile_photo_path', 2048)->nullable();
             $table->unsignedBigInteger('plantel_id')->nullable();
             $table->unsignedBigInteger('area_id')->nullable();
+            $table->unsignedBigInteger('supervisor_rectoria')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

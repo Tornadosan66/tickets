@@ -38,7 +38,7 @@
                                    <div class="col-md-4">
                                         <label for="area">Areas</label>
                                         <select  id="area" name="area" class="form-control selectpicker "data-live-search="true">
-                                            <option>Selecciona un area</option>
+                                            <option value="">Selecciona un area</option>
                                             @foreach($areas as $area)
                                                 <option value="{{$area->id}}">{{$area->nombre_area}}</option>
                                             @endforeach

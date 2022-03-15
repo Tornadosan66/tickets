@@ -84,6 +84,19 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    <div class="col-md-4">
+                                        <label for="supervisorRectoria">Supervisor Rectoria</label>
+                                        <select   id="supervisorRectoria" name="supervisorRectoria" class="form-control selectpicker "data-live-search="true">
+                                            <option value="">Seleciona una opción</option>
+                                            @foreach($supervisores as $supervisor)
+                                                @if($usuarios->supervisor_rectoria == $supervisor->id)
+                                                <option selected value="{{$supervisor->id}}">{{$supervisor->name}}</option>
+                                                @else
+                                                <option  value="{{$supervisor->id}}">{{$supervisor->name}}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
 
                                 </div>
 

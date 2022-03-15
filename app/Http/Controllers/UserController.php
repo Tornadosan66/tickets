@@ -8,6 +8,7 @@ use App\Models\Area;
 use App\Models\Planteles;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -75,6 +76,7 @@ class UserController extends Controller
             $rol = $use->getRoleNames();
             $roles = Role::all();
             $planteles = Planteles::all();
+            $usuarios = DB::table('users')->join('model_has_roles','model_id' ,'=', 'users.id')->select('users.id', 'users.name')->whereNull('deleted_at')->where('model_has_roles.role_id', '<', 3)->get();
 
         if($rol[0] == 'Superusuario'){
             $areas = Area::all();
@@ -91,7 +93,7 @@ class UserController extends Controller
             //dd($areas);
         }
 
-        return view('users.create',compact('roles','planteles','areas'));
+        return view('users.create',compact('roles','planteles','areas','usuarios'));
     }
 
     /**
@@ -102,6 +104,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
         $idUse = Auth::id();
         $use = new User();
         $use = $use->where('id',$idUse)->first();
@@ -112,6 +115,7 @@ class UserController extends Controller
             $user->email =  $request->email;
             $user->plantel_id =  $request->plantel;
             $user->area_id =  $request->area;
+            $user->supervisor_rectoria =  $request->supervisorRectoria;
             $user->password = bcrypt($request->password);
 
             $user->save();
@@ -122,6 +126,7 @@ class UserController extends Controller
             $user->email =  $request->email;
             $user->plantel_id = $use->plantel_id;
             $user->area_id = $request->area;
+            $user->supervisor_rectoria =  $request->supervisorRectoria;
             $user->password = bcrypt($request->password);
 
             $user->save();
@@ -161,6 +166,7 @@ class UserController extends Controller
         $use = new User();
         $use = $use->where('id',$idUse)->first();
         $rol = $use->getRoleNames();
+        $supervisores = DB::table('users')->join('model_has_roles','model_id' ,'=', 'users.id')->select('users.id', 'users.name')->whereNull('deleted_at')->where('model_has_roles.role_id', '<', 3)->get();
 
     
         if($rol[0] == 'Superusuario'){
@@ -175,7 +181,7 @@ class UserController extends Controller
             //dd($areas);
         }
 
-        return view('users.edit',compact('usuarios','roles','planteles','areas'));
+        return view('users.edit',compact('usuarios','roles','planteles','areas','supervisores'));
     }
 
     /**
@@ -202,6 +208,11 @@ class UserController extends Controller
             if($request->rol){
                 $user->roles()->sync($request->rol);
             }
+            if($request->supervisorRectoria)
+            {
+                $user->supervisor_rectoria =  $request->supervisorRectoria;    
+            }
+            
 
             $user->save();
 

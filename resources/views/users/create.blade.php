@@ -72,6 +72,15 @@
                                             @endif
                                         </select>
                                     </div>
+                                    <div class="col-md-4">
+                                        <label for="supervisorRectoria">Supervisor Rectoria</label>
+                                        <select   id="supervisorRectoria" name="supervisorRectoria" class="form-control selectpicker "data-live-search="true">
+                                            <option value="">Seleciona una opción</option>
+                                            @foreach($usuarios as $usuario)
+                                                <option value="{{$usuario->id}}">{{$usuario->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                     
                                 </div>
 

@@ -48,7 +48,7 @@ class DashBoardController extends Controller
                  $join->on('tickets.area_id', '=', 'areas.id');
                  })->join('users', function ($join){
                  $join->on('tickets.responsable_id', '=', 'users.id');
-             })->select('tickets.*','users.email')->where('areas.id_supervisor_area',$use->id)->where('status_id',1)->get();
+             })->select('tickets.*','users.email')->where('areas.id_supervisor_area',$use->id)->orWhere('users.supervisor_rectoria',$idUse)->where('status_id',1)->get();
 
 
       
@@ -66,7 +66,7 @@ class DashBoardController extends Controller
                  $join->on('tickets.area_id', '=', 'areas.id');
                  })->join('users', function ($join){
                  $join->on('tickets.responsable_id', '=', 'users.id');
-             })->select('tickets.*','users.email')->where('areas.id_supervisor_area',$use->id)->where('status_id',2)->get();
+             })->select('tickets.*','users.email')->where('areas.id_supervisor_area',$use->id)->orWhere('users.supervisor_rectoria',$idUse)->where('status_id',2)->get();
         }else if($roles[0] == 'Superusuario'){
             $completados = Ticket::where('status_id', 2)->get();
         }
@@ -80,7 +80,7 @@ class DashBoardController extends Controller
                  $join->on('tickets.area_id', '=', 'areas.id');
                  })->join('users', function ($join){
                  $join->on('tickets.responsable_id', '=', 'users.id');
-             })->select('tickets.*','users.email')->where('areas.id_supervisor_area',$use->id)->where('status_id',3)->get();
+             })->select('tickets.*','users.email')->where('areas.id_supervisor_area',$use->id)->orWhere('users.supervisor_rectoria',$idUse)->where('status_id',3)->get();
         }else if($roles[0] == 'Superusuario'){
             $cancelado = Ticket::where('status_id', 3)->get();
         }
@@ -94,7 +94,7 @@ class DashBoardController extends Controller
                  $join->on('tickets.area_id', '=', 'areas.id');
                  })->join('users', function ($join){
                  $join->on('tickets.responsable_id', '=', 'users.id');
-             })->select('tickets.*','users.email')->where('areas.id_supervisor_area',$use->id)->where('status_id',4)->get();
+             })->select('tickets.*','users.email')->where('areas.id_supervisor_area',$use->id)->orWhere('users.supervisor_rectoria',$idUse)->where('status_id',4)->get();
         }else if($roles[0] == 'Superusuario'){
             $validacion = Ticket::where('status_id', 4)->get();
         }
@@ -108,7 +108,7 @@ class DashBoardController extends Controller
                  $join->on('tickets.area_id', '=', 'areas.id');
                  })->join('users', function ($join){
                  $join->on('tickets.responsable_id', '=', 'users.id');
-             })->select('tickets.*','users.email')->where('areas.id_supervisor_area',$use->id)->where('status_id',5)->get();
+             })->select('tickets.*','users.email')->where('areas.id_supervisor_area',$use->id)->orWhere('users.supervisor_rectoria',$idUse)->where('status_id',5)->get();
         }else if($roles[0] == 'Superusuario'){
             $perdido = Ticket::where('status_id', 5)->get();
         }
