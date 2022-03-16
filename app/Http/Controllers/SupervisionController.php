@@ -42,7 +42,7 @@ class SupervisionController extends Controller
                  $join->on('tickets.area_id', '=', 'areas.id');
                  })->join('users', function ($join){
                  $join->on('tickets.responsable_id', '=', 'users.id');
-             })->select('users.*')->where('areas.id_supervisor_area',$use->id)->orWhere('users.supervisor_rectoria',$idUse)->get();
+             })->select('users.*')->where('areas.id_supervisor_area',$use->id)->orWhere('users.supervisor_rectoria',$idUse)->distinct()->get();
          
         }
 
