@@ -7,6 +7,8 @@ use App\Models\Tareas;
 use App\Models\Area;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\DB;
 class TareasController extends Controller
 {
     /**
@@ -27,8 +29,27 @@ class TareasController extends Controller
     public function index()
     {
         
-        $tareas = new Tareas();
-        $tareas = $tareas->all();
+        $idUse = Auth::id();
+        $use = new User();
+        $use = $use->where('id',$idUse)->first();
+        $roles = $use->getRoleNames();
+
+        if($roles[0] == 'Superusuario'){
+            $tareas = new Tareas();
+            $tareas = $tareas->all();
+        }
+        else
+        {
+            $tareas = DB::table('tareas')
+             ->join('areas', function ($join){
+                 $join->on('tareas.id_area', '=', 'areas.id');
+                 })->join('planteles', function ($join){
+                 $join->on('areas.id_plantel', '=', 'planteles.id');
+             })->select('tareas.*','areas.nombre_area')->where('areas.id_supervisor_area',$idUse)->get();
+        }
+
+        
+
         return view('tareas.index',compact('tareas'));
         
     }

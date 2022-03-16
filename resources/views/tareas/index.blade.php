@@ -43,7 +43,7 @@
 
 
 
-                                        <td>{{$tarea->area->nombre_area}}</td>
+                                        <td>{{$tarea->nombre_area}}</td>
 
                                        
                                             <td>
