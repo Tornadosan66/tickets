@@ -56,7 +56,7 @@ class AreasController extends Controller
      */
     public function create()
     {
-        if(Auth::user()->plantel_id == '1' && Auth::user()->id != '1')
+        if(Auth::user()->plantel_id == '1' && Auth::user()->id != '1' && Auth::user()->id != '12')
         {
              abort(403);
         }
@@ -115,7 +115,7 @@ class AreasController extends Controller
      */
     public function edit($id)
     {
-                if(Auth::user()->plantel_id == '1' && Auth::user()->id != '1')
+                if(Auth::user()->plantel_id == '1' && Auth::user()->id != '1' && Auth::user()->id != '12')
         {
              abort(403);
         }

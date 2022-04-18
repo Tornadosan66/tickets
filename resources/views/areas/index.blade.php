@@ -20,7 +20,7 @@
                         </div>
                         <div class="card-body">
                            @can('areas.create')
-                           @if(Auth::user()->plantel_id != '1' ||  Auth::user()->id == 1)
+                           @if(Auth::user()->plantel_id != '1' ||  Auth::user()->id == 1 || Auth::user()->id == 12 )
                                 <h3>
                                     <a href="{{route('areas.create')}}" style="color:#037DB4;"><i class="far fa-plus-square"></i>&nbsp;&nbsp;Areas</a>
                                 </h3>
@@ -33,7 +33,7 @@
                                     <th>plantel</th>
                                     <th>Supervisor</th>
                                     @can('areas.edit')
-                                     @if(Auth::user()->plantel_id != '1' || Auth::user()->id == 1)
+                                     @if(Auth::user()->plantel_id != '1' || Auth::user()->id == 1 || Auth::user()->id == 12 )
                                     <th>Editar</th>
                                     @endcan
                                     @can('areas.destroy')
@@ -49,7 +49,7 @@
                                         <td>{{$area->planteles->nombre_plantel}}</td>
                                         <td>{{$area->supervisor->name}}</td>
                                             @can('areas.edit')
-                                            @if(Auth::user()->plantel_id != '1' || Auth::user()->id == 1)
+                                            @if(Auth::user()->plantel_id != '1' || Auth::user()->id == 1 || Auth::user()->id == 12 )
                                             <td>
                                                 <a href="{{route('areas.edit',$area->id)}}">
                                                     <button class="btn btn-primary">
