@@ -201,7 +201,7 @@ class DashBoardController extends Controller
          $superVisorArea = Area::where('id',$ticket->area_id)->first();
 
          array_push($correos,$ticket->responsable->email,$superVisorArea->supervisor->email);
-         //Mail::to($correos)->send($mailable);
+         Mail::to($correos)->send($mailable);
         return redirect()->route('dashboard')->with('info','se hizo el ticket');
     }
 
