@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="plantel">Plantel</label>
-                                        <select  id="plantel" name="plantel" class="form-control selectpicker "data-live-search="true">
+                                        <select  required autofocus id="plantel" name="plantel" class="form-control selectpicker "data-live-search="true">
                                             <option value="">Seleciona una opción</option>
                                             @foreach($planteles as $plantel)
                                                 <option value="{{$plantel->id}}">{{$plantel->nombre_plantel}}</option>
@@ -63,7 +63,7 @@
 
                                     <div class="col-md-4">
                                         <label for="area">Area</label>
-                                        <select  id="area" name="area" class="form-control selectpicker "data-live-search="true">
+                                        <select required autofocus  id="area" name="area" class="form-control selectpicker "data-live-search="true">
                                             <option value="">Seleciona una opción</option>
                                             @if(Auth::user()->getRoleNames()[0] == 'Supervisor')
                                                 @foreach($areas as $area)
