@@ -1,6 +1,7 @@
 <table id="perdidasInfo" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
   <thead>
     <tr>
+      <th>#Ticket</th>
       <th>Descripcion</th>
       <th>Fecha que se asingno</th>
       <th>Asignada a </th>
@@ -10,6 +11,7 @@
     <tbody>
       @foreach($perdido as $ticket)          
       <tr>
+        <td>{{$ticket->id}}</td>
         <td>{{$ticket->descripcion}}</td> <!--Descripcion-->
         <td>{{$ticket->fecha_envio}}</td> <!--Fecha que se asingno-->
         @if(Auth::user()->getRoleNames()[0] == 'Superusuario' || Auth::user()->getRoleNames()[0] == 'Usuario')
