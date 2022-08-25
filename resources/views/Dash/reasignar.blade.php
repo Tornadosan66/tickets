@@ -49,7 +49,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <label for="desc">Descripción</label>
-                                        <textarea id="desc" name="desc" placeholder="Descripción de la tarea" rows="3" cols="100" readonly>{{$ticket->descripcion}}</textarea>
+                                        <textarea id="desc" name="desc" placeholder="Descripción de la tarea" rows="3" cols="100" >{{$ticket->descripcion}}</textarea>
 
                                     </div>
 

@@ -123,10 +123,11 @@ class DashBoardController extends Controller
 
     public function re_asignar_ticket(Request $request)
     {
+
         $planteles = Planteles::all();
         $areas = Area::all();
         $usuarios = User::all();
-        $ticket = Ticket::findorfail($request->id_reasignar)->first();
+        $ticket = Ticket::findorfail($request->id_reasignar);
 
         return view('Dash.reasignar', compact("planteles", "areas", "usuarios", "ticket"));
     }
@@ -200,8 +201,8 @@ class DashBoardController extends Controller
          $correos = [];
          $superVisorArea = Area::where('id',$ticket->area_id)->first();
 
-         array_push($correos,$ticket->responsable->email,$superVisorArea->supervisor->email);
-         Mail::to($correos)->send($mailable);
+        array_push($correos,$ticket->responsable->email,$superVisorArea->supervisor->email);
+        Mail::to($correos)->send($mailable);
         return redirect()->route('dashboard')->with('info','se hizo el ticket');
     }
 
