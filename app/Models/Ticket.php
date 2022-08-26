@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\User;
+use App\Models\Status;
 class Ticket extends Model
 {
     use HasFactory;
@@ -16,6 +17,10 @@ class Ticket extends Model
     }
      public function solicitante(){
         return $this->belongsTo(User::class,'solicitante_id');
+    }
+
+     public function status(){
+        return $this->belongsTo(Status::class,'status_id');
     }
          
 }

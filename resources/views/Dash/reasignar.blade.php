@@ -28,7 +28,7 @@
                                   
                                     <div class="col-md-3">
                                         <label for="plantel">Plantel</label>
-                                        <select  id="plantel" name="plantel" class="form-control selectpicker "data-live-search="true">
+                                        <select  required id="plantel" name="plantel" class="form-control selectpicker "data-live-search="true">
                                             <option value="0">Seleciona una opcion</option>
                                             @foreach($planteles as $plantel)
                                                 <option value="{{$plantel->id}}">{{$plantel->nombre_plantel}}</option>
@@ -37,19 +37,19 @@
                                     </div>
                                     <div class="col-md-3">
                                         <label for="area">Area</label>
-                                        <select  id="area" name="area" class="form-control selectpicker "data-live-search="true">
+                                        <select  required id="area" name="area" class="form-control selectpicker "data-live-search="true">
                                                 <option value="0">Seleciona una opcion</option>
                                         </select>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="Usuarios">Usuarios</label>
-                                        <select  id="Usuarios" name="Usuarios" class="form-control selectpicker "data-live-search="true">
+                                        <select  required id="Usuarios" name="Usuarios" class="form-control selectpicker "data-live-search="true">
                                                 <option value="0">Seleciona una opcion</option>
                                         </select>
                                     </div>
                                     <div class="col-md-8">
                                         <label for="desc">Descripción</label>
-                                        <textarea id="desc" name="desc" placeholder="Descripción de la tarea" rows="3" cols="100" >{{$ticket->descripcion}}</textarea>
+                                        <textarea required id="desc" name="desc" placeholder="Descripción de la tarea" rows="3" cols="100" >{{$ticket->descripcion}}</textarea>
 
                                     </div>
 

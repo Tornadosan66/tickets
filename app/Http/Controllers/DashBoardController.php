@@ -113,7 +113,12 @@ class DashBoardController extends Controller
             $perdido = Ticket::where('status_id', 5)->get();
         }
 
-        return view('dashboard',compact("pendientes", "completados", "cancelado", "validacion", "perdido"));
+
+
+       
+            $misticket = Ticket::where('solicitante_id', Auth::id())->get();
+
+        return view('dashboard',compact("pendientes", "completados", "cancelado", "validacion", "perdido",'misticket'));
     }
     /**
      * Show the form for creating a new resource.
@@ -281,12 +286,16 @@ class DashBoardController extends Controller
 
         $ticket = Ticket::findorfail($id);
         tickets_completados::where('ticket_id', $ticket->id)->delete();
+        $ticket->descripcion = $request->desc;
         $ticket->area_id = $request->area;
         $ticket->responsable_id = $request->Usuarios;
+        $ticket->solicitante_id = Auth::id();
+       // $ticket->fecha_envio = $request->fecha_envio;
+        $ticket->status_id = "1";
         $ticket->tiempo_realizar = 1440;
-        $ticket->status_id = 1;
+        //$ticket->tarea_id = 0;
 
-        $ticket->save();
+        $ticket->save();    
 
         $ticket->setAttribute('name',$ticket->responsable->name);
         $ticket->setAttribute('solicitante',$ticket->solicitante->name);
@@ -294,8 +303,8 @@ class DashBoardController extends Controller
          $correos = [];
          $superVisorArea = Area::where('id',$ticket->area_id)->first();
 
-         array_push($correos,$ticket->responsable->email,$superVisorArea->supervisor->email);
-         Mail::to($correos)->send($mailable);
+        array_push($correos,$ticket->responsable->email,$superVisorArea->supervisor->email);
+        Mail::to($correos)->send($mailable);
 
         return redirect()->route('dashboard')->with('info','Se re-asigno, una disculpa');
     }

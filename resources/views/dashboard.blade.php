@@ -138,6 +138,9 @@
   <li class="nav-item">
     <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-out" role="tab" aria-controls="pills-validation" aria-selected="false">Perdidas</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-misticke" role="tab" aria-controls="pills-validation" aria-selected="false">Mis Tickets</a>
+  </li>
 </ul>
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">@include('partials.pendientes')</div>
@@ -145,6 +148,7 @@
   <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">@include('partials.canceladas')</div>
   <div class="tab-pane fade" id="pills-validation" role="tabpanel" aria-labelledby="pills-contact-tab">@include('partials.validacion')</div>
   <div class="tab-pane fade" id="pills-out" role="tabpanel" aria-labelledby="pills-contact-tab">@include('partials.perdidas')</div>
+  <div class="tab-pane fade" id="pills-misticke" role="tabpanel" aria-labelledby="pills-contact-tab">@include('partials.misticket')</div>
 </div>
 
     <!-- fin Nav -->
