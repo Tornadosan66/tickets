@@ -3,7 +3,7 @@
     <tr>
       <th>#ticket</th>
       <th>Descripcion</th>
-      <th>Fecha que se asingno</th>
+      <th>Fecha que se asigno</th>
       <th>Asignada a </th>
       <th>Tiempo Restaste para terminar </th>
       <th>Revisión</th>
